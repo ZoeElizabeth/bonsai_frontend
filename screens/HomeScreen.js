@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   View,
   Button,
+  Fetch, 
+  FlatList,
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
@@ -19,6 +21,30 @@ export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
+
+  constructor(props){
+    super(props);
+    this.state ={ isLoading: true}
+  }
+
+
+  // componentDidMount(){
+  //   return fetch('/* https://facebook.github.io/react-nativ */e/movies.json')
+  //     .then((response) => response.json())
+  //     .then((responseJson) => {
+
+  //       this.setState({
+  //         isLoading: false,
+  //         dataSource: responseJson.movies,
+  //       }, function(){
+
+  //       });
+
+  //     })
+  //     .catch((error) =>{
+  //       console.error(error);
+  //     });
+  // }
 
 
   render() {
@@ -32,6 +58,7 @@ export default class HomeScreen extends React.Component {
         title="AddItem"
         />
         <AddItem/>
+
         </ScrollView>
       
         <View style={styles.tabBarInfoContainer}>

@@ -1,5 +1,14 @@
 import React, {Component} from 'react';
 import {Modal, Text, TouchableHighlight, View, Alert, StyleSheet} from 'react-native';
+import tcomb from 'tcomb-form-native';
+const Form = tcomb.form.Form
+
+const Action = tcomb.struct({ 
+ action_title: tcomb.String, 
+ description: tcomb.String, 
+ redFlag: tcomb.Boolean, 
+ color_category: tcomb.String, 
+})
 
 export default class ModalExample extends Component {
   state = {
@@ -10,6 +19,8 @@ export default class ModalExample extends Component {
     this.setState({modalVisible: visible});
   }
 
+
+ 
   render() {
     return (
       <View style={styles.container}>
@@ -23,6 +34,7 @@ export default class ModalExample extends Component {
           <View>
             <View style={styles.containerPop}>
               <Text>Changes Yay!</Text>
+              <Form type={Action} />
 
               <TouchableHighlight
                 onPress={() => {
@@ -51,6 +63,7 @@ const styles = StyleSheet.create({
   backgroundColor: '#fff',
   },
   containerPop: {
+    width: '100%',
     alignItems: 'center',
     paddingTop: 120,
     },

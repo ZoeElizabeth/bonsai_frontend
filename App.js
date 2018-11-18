@@ -1,12 +1,17 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, Fetch, FlatList, Text } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 
 export default class App extends React.Component {
-  state = {
-    isLoadingComplete: false,
-  };
+  // state = {
+  //   isLoadingComplete: false,
+  // };
+  constructor(props){
+    super(props);
+    this.state ={ isLoadingComplete: false}
+  }
+
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
@@ -20,8 +25,11 @@ export default class App extends React.Component {
     } else {
       return (
         <View style={styles.container}>
+
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+
           <AppNavigator />
+
         </View>
       );
     }
