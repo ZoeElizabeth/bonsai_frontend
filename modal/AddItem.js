@@ -14,9 +14,7 @@ export default class ModalExample extends Component {
         color_category: '',
         modalVisible: false,
         checked: false,
-        checked2: false,
-        checked3: false,
-        checked4: false,
+
 
     }
 }
@@ -25,12 +23,14 @@ export default class ModalExample extends Component {
     this.setState({modalVisible: visible});
   }
 
+
+
   handleSubmit = () => {
     const action = this.state.action;
     const description = this.state.description;
     const redFlag = this.state.redFlag
-     // use that ref to get the form value
-    console.log('value: ', action, description, redFlag);
+    const color_category = this.state.color_category;
+    console.log('value: ', action, description, redFlag, color_category);
 
     fetch('http://localhost:8080/dayli_list/1/actions', {
     method: 'POST',
@@ -42,12 +42,44 @@ export default class ModalExample extends Component {
       action_title: action,
       description: description,
       redFlag: redFlag,
-      color_category: "blue",
+      color_category: color_category,
     }),
   })
   }
 
+
+  confirmPost = () => {
+    this.handleSubmit()
+    this.setModalVisible(!this.state.modalVisible)
+  }
+
+
   render() {
+
+    const buttons = [
+      {
+        text: 'blue',
+        action: () => { this.setState({color_category: 'blue', checked: !this.state.checked})}
+      }, 
+      {
+        text: 'purple',
+        action: () => {this.setState({color_category: 'purple', checked: !this.state.checked})}         
+      },
+      {
+        text: 'yellow',
+        action: () => {this.setState({color_category: 'yellow', checked: !this.state.checked})}
+      }, 
+      {
+        text: 'orange',
+        action: () => {this.setState({color_category: 'orange', checked: !this.state.checked}) }       
+      }
+  ];
+
+
+    const catButtons =  buttons.map(b => {
+      return <CheckBox checked={this.state.checked} key={b.text} color={b.text} text={b.text} onPress={b.action} />;
+    });
+
     return (
       <View style={styles.container}>
         <Modal
@@ -55,18 +87,24 @@ export default class ModalExample extends Component {
           transparent={false}
           visible={this.state.modalVisible}
           onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          }}>
+          Alert.alert('Modal has been closed.');}}>
 
         <Content style={styles.containerPop}>
           <Form>
             <Item>
-              <Input placeholder="Action"  onChangeText={(inputVal) => this.setState({action: inputVal})}
-                value={this.state.action}  />
+              <Input placeholder="Action" 
+               multiline={true}
+                onChangeText={(inputVal) => this.setState({action: inputVal})}
+                value={this.state.action}/>
             </Item>
 
-            <View style={styles.onCategoryClick}>
+            <View style={styles.row}>
+
+        
+
             <Icon name="md-happy"  onPress={() => {
+
+
                   this.setState({redFlag: false});
                 }}
                 ></Icon>
@@ -74,11 +112,14 @@ export default class ModalExample extends Component {
                   this.setState({redFlag: true});
 
                 }}
-               ></Icon>
-               </View>
+            ></Icon>
 
-          <View style={styles.onCategoryClick}>
-            <CheckBox checked={this.state.checked} onPress={() => { 
+              {catButtons}
+
+            </View>
+
+          {/* <View style={styles.row}> */}
+            {/* <CheckBox checked={this.state.checked} onPress={() => { 
                   this.setState({color_category: 'blue', checked: !this.state.checked});
                 }} color="#03A9F4"/>
             <CheckBox checked={this.state.checked2} onPress={() => { 
@@ -89,47 +130,49 @@ export default class ModalExample extends Component {
                 }} color="#FCCB00"/>
             <CheckBox checked={this.state.checked4} onPress={() => { 
                   this.setState({color_category: 'orange', checked4: !this.state.checked4});
-                }} color="#FF9800"/>
-                </View>
+                }} color="#FF9800"/> */}
+                {/* </View> */}
 
-            <Item last>
-              <Input placeholder="Description"  onChangeText={(inputVal) => this.setState({description: inputVal})}
-                value={this.state.description} 
+            <Item>
+            <Input 
+              placeholder="Description"  
+              multiline={true}
+              onChangeText={(inputVal) => this.setState({description: inputVal})}
+              value={this.state.description} 
                />
             </Item>
   
           </Form>
 
-
-            <TouchableOpacity  onPress={this.handleSubmit}> 
-            <Text style={styles.button}>
-               Confirm
-             </Text>
+          <View style={styles.row}>
+            <TouchableOpacity 
+              style={styles.button}
+              onPress={this.confirmPost} > 
+                <Text style={styles.buttonFont}>
+                Confirm
+                </Text>
             </TouchableOpacity >
 
-                <TouchableOpacity
-                onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                }}>
-            <Text style={styles.button}>
-               Close
-             </Text>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+              this.setModalVisible(!this.state.modalVisible);}}>
+                <Text style={styles.buttonFont}>
+                Close
+                </Text>
             </TouchableOpacity >
-
-
-    
-          
+          </View>
         </Content>
    
 
 
   
         </Modal>
-        <TouchableOpacity
+        <TouchableOpacity style={styles.button}
            onPress={() => {
             this.setModalVisible(true);
           }}>
-            <Text style={styles.button}>
+            <Text style={styles.buttonFont}>
                Add Item
              </Text>
             </TouchableOpacity >
@@ -140,9 +183,9 @@ export default class ModalExample extends Component {
 }
 
 const styles = StyleSheet.create({
+
   container: {
-  paddingTop: 40,
-  backgroundColor: '#fff',
+    backgroundColor: '#fff',
   },
 
   containerPop: {
@@ -152,15 +195,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     },
 
+  buttonFont: {
+    color: '#fff',
+  },
+
   button: {
     // height: 30,
     width: 130,
     textAlign: 'center',
-    justifyContent: 'center',
-    color: '#fff',
+    alignItems: 'center',
     backgroundColor: '#AAD9A5',
+    borderRadius: 10,
   },
-  onCategoryClick: {
+  row: {
+      padding: 20,
       flexDirection: 'row',
+      alignItems: 'center',
+  },
+
+  background: {
+    backgroundColor:"green",
+
   }
   });

@@ -15,6 +15,7 @@ import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 import AddItem from '../modal/AddItem';
+import image from '../tree_img/export.js';
 
 
 export default class HomeScreen extends React.Component {
@@ -35,8 +36,6 @@ export default class HomeScreen extends React.Component {
         this.setState({
           isLoading: false,
           dataSource: responseJson,
-        }, function(){
-
         });
       })
       .catch((error) =>{
@@ -50,24 +49,26 @@ export default class HomeScreen extends React.Component {
   render() {
 
 
-    return (
-      <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.contentContainer}>
-        <AddItem/>
 
-        </ScrollView>
+    return (
       
+      <View style={styles.container}>
         <View style={styles.tabBarInfoContainer}>
           <Text style={styles.tabBarInfoText}>Welcome Back to Bonsai, Zoe</Text>
+        </View>
 
+        <Image style={styles.tree_imgs} source={image.tree_30} />
+        <ScrollView contentContainerStyle={styles.contentContainer}>
 
-     
+        <View style={styles.center} >
+          <AddItem />  
         </View>
         <FlatList
           data={this.state.dataSource}
-          renderItem={({item}) => <Text style={styles.contentContainer}>{item.color_category}, {item.action_title}</Text>}
+          renderItem={({item}) => <Text style={styles.contentContainer}>{item.redFlag ? 'o' : 't'}, {item.action_title}, {item.color_category}</Text>}
           keyExtractor={({id}, index) => id.toString()}
-        />
+          />
+        </ScrollView>
       </View>
       
     );
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 120,
+    paddingTop: 90,
     justifyContent: 'center',
   },
   contentContainer: {
@@ -146,5 +147,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
 
   },
+  tree_imgs: {
+  height: 200,
+  width: '100%',
+  },
+  center: {
+    alignItems: 'center',
+  }
 
 });
