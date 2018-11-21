@@ -27,24 +27,24 @@ export default class HomeScreen extends React.Component {
     this.state ={ isLoading: true}
   }
 
+  componentDidMount(){
+    return fetch('http://localhost:8080/dayli_list/1/actions')
+      .then((response) => response.json())
+      .then((responseJson) => {
+            console.log(responseJson)
+        this.setState({
+          isLoading: false,
+          dataSource: responseJson,
+        }, function(){
 
-  // componentDidMount(){
-  //   return fetch('/* https://facebook.github.io/react-nativ */e/movies.json')
-  //     .then((response) => response.json())
-  //     .then((responseJson) => {
+        });
+      })
+      .catch((error) =>{
+        console.error(error);
+      });
+  }
 
-  //       this.setState({
-  //         isLoading: false,
-  //         dataSource: responseJson.movies,
-  //       }, function(){
 
-  //       });
-
-  //     })
-  //     .catch((error) =>{
-  //       console.error(error);
-  //     });
-  // }
 
 
   render() {
@@ -52,11 +52,7 @@ export default class HomeScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        <Button
-        onPress={AddItem}
-        title="AddItem"
-        />
+        <ScrollView contentContainerStyle={styles.contentContainer}>
         <AddItem/>
 
         </ScrollView>
@@ -65,8 +61,13 @@ export default class HomeScreen extends React.Component {
           <Text style={styles.tabBarInfoText}>Welcome Back to Bonsai, Zoe</Text>
 
 
+     
         </View>
-        
+        <FlatList
+          data={this.state.dataSource}
+          renderItem={({item}) => <Text style={styles.contentContainer}>{item.color_category}, {item.action_title}</Text>}
+          keyExtractor={({id}, index) => id.toString()}
+        />
       </View>
       
     );
@@ -110,10 +111,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    paddingTop: 120,
+    justifyContent: 'center',
   },
   contentContainer: {
     paddingTop: 30,
-    
+    textAlign: 'center',
+    fontSize: 25,
   },
 
   tabBarInfoContainer: {
