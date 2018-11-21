@@ -101,7 +101,6 @@ export default class ModalExample extends Component {
             <View style={styles.row}>
 
         
-
             <Icon name="md-happy"  onPress={() => {
 
 

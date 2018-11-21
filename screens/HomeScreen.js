@@ -44,8 +44,6 @@ export default class HomeScreen extends React.Component {
   }
 
 
-
-
   render() {
 
 
@@ -64,6 +62,7 @@ export default class HomeScreen extends React.Component {
           <AddItem />  
         </View>
         <FlatList
+          extraData={this.state}
           data={this.state.dataSource}
           renderItem={({item}) => <Text style={styles.contentContainer}>{item.redFlag ? 'o' : 't'}, {item.action_title}, {item.color_category}</Text>}
           keyExtractor={({id}, index) => id.toString()}
@@ -117,7 +116,8 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingTop: 30,
-    textAlign: 'center',
+    paddingLeft:10,
+    textAlign: 'left',
     fontSize: 25,
   },
 
@@ -153,6 +153,10 @@ const styles = StyleSheet.create({
   },
   center: {
     alignItems: 'center',
-  }
-
+  },
+  circle: {
+    width: 100,
+    height: 100,
+    borderRadius: 100/2
+}
 });
