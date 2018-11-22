@@ -56,9 +56,8 @@ export default class HomeScreen extends React.Component {
           <Text style={styles.tabBarInfoText}>Welcome Back to Bonsai, Zoe</Text>
         </View>
 
-        <View style={style.tree_imgs}>
+        <Image style={styles.tree_imgs} source={image.tree_30} />
         <Processgraph /> 
-        </View>
         <ScrollView contentContainerStyle={styles.contentContainer}>
 
         <View style={styles.center} > 
@@ -151,7 +150,6 @@ const styles = StyleSheet.create({
 
   },
   tree_imgs: {
-  backgroundImage: image.tree_30,
   height: 200,
   width: '100%',
   },
