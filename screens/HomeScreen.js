@@ -83,10 +83,6 @@ itemList = (item) => {
       
        
         <ScrollView contentContainerStyle={styles.contentContainer}>
-
-
-     
-     
         <FlatList
           extraData={this.state}
           data={this.state.dataSource}
@@ -141,7 +137,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   contentContainer: {
-    top: 25,
     paddingTop: 13,
     paddingLeft: 10,
     textAlign: 'left',
@@ -149,9 +144,37 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'black',
     flexDirection: 'row',
-    // alignItems: 'center'
   },
 
+  tree_imgs: {
+    top: 45,
+    flex: 1,
+    height: 200,
+    // overflow: 'visible',
+  },
+  center: {
+    paddingTop: 65,
+    alignItems: 'center',
+  },
+  tree_graph: {
+    top: 60,
+  // position: 'absolute',
+  },
+  icon:{
+    paddingRight: 10,
+    color: 'green',
+    fontSize: 10,
+  },
+  icon2:{
+    paddingRight: 10,
+    fontSize: 10,
+    color: 'red',
+  },
+  fonty:{
+    color: 'black',
+    fontSize: 18,
+
+  },
   tabBarInfoContainer: {
     position: 'absolute',
     top: 35,
@@ -179,34 +202,4 @@ const styles = StyleSheet.create({
     fontSize: 18,
 
   },
-  tree_imgs: {
-    top: 45,
-    flex: 1,
-    height: 200,
-    // overflow: 'visible',
-
-  },
-  center: {
-    top: 65,
-    alignItems: 'center',
-  },
-  tree_graph: {
-    top: 60,
-  // position: 'absolute',
-  },
-  icon:{
-    paddingRight: 10,
-    color: 'green',
-    fontSize: 10,
-  },
-  icon2:{
-    paddingRight: 10,
-    fontSize: 10,
-    color: 'red',
-  },
-  fonty:{
-    color: 'black',
-    fontSize: 18,
-
-  }
 });
