@@ -10,6 +10,7 @@ import {
   Button,
   Fetch, 
   FlatList,
+  ImageBackground
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
@@ -52,17 +53,19 @@ export default class HomeScreen extends React.Component {
     return (
       
       <View style={styles.container}>
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>Welcome Back to Bonsai, Zoe</Text>
-        </View>
 
-        <Image style={styles.tree_imgs} source={image.tree_30} />
-        <Processgraph /> 
+          <Text style={styles.tabBarInfoText} >Welcome Back to Bonsai</Text> 
+       
+        <ImageBackground style={styles.tree_imgs} source={image.tree_30} />
+        <Processgraph/> 
+        <View style={styles.center} > 
+        <AddItem />  
+        </View>
         <ScrollView contentContainerStyle={styles.contentContainer}>
 
-        <View style={styles.center} > 
-          <AddItem />  
-        </View>
+
+        
+     
         <FlatList
           extraData={this.state}
           data={this.state.dataSource}
@@ -113,14 +116,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 90,
     justifyContent: 'center',
   },
   contentContainer: {
-    paddingTop: 30,
-    paddingLeft:10,
+    paddingTop: 22,
+    paddingLeft: 10,
     textAlign: 'left',
-    fontSize: 25,
+    fontSize: 18,
   },
 
   tabBarInfoContainer: {
@@ -144,16 +146,21 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   tabBarInfoText: {
+    top: 60,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#70B879',
     fontSize: 18,
 
   },
   tree_imgs: {
-  height: 200,
-  width: '100%',
+    top: 105,
+    flex: 1,
+    height: 200,
+    overflow: 'visible',
+
   },
   center: {
+    paddingTop: 20,
     alignItems: 'center',
   },
   circle: {

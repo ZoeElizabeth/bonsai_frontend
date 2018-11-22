@@ -1,13 +1,16 @@
 import React from 'react';
 import { SectionList, Image, StyleSheet, Text, View } from 'react-native';
-import { Constants, SvgEllipseProps } from 'expo';
+import { Constants, Svg, EllipseProps } from 'expo';
 import { AreaChart, Grid, ProgressCircle } from 'react-native-svg-charts'
 import PropTypes from 'prop-types';
 
 export default class ProcessGraph extends React.Component {
   render() {
     return(
-        <View style={{ padding: this.props.padding, width: this.props.size + (this.props.padding * 2) }}>
+        <View style={{ padding: this.props.padding, width: this.props.size + (this.props.padding * 2), 
+          backgroundColor: 'transparent',
+          marginLeft: 75,
+        }}>
           <View>
             <ProgressCircle
               strokeWidth={this.props.stroke}
@@ -19,7 +22,7 @@ export default class ProcessGraph extends React.Component {
             />
           </View>
           <View style={{ position: 'absolute', bottom: 0, left: this.props.padding, width: this.props.size }}>
-            <Text style={{ fontSize: 12, textAlign: 'center', fontWeight: 'bold' }}>Result</Text>
+            <Text style={{ fontSize: 12, textAlign: 'center', fontWeight: 'bold' }}>Growth Spurt</Text>
             <Text style={{ fontSize: 18, textAlign: 'center', fontWeight: 'bold' }}>{this.props.result}/{this.props.total}</Text>
           </View>
         </View>
@@ -39,8 +42,8 @@ ProcessGraph.propTypes = {
 ProcessGraph.defaultProps = {
   result: 10,
   total: 30,
-  padding: 10,
-  size: 200,
+  padding: 5,
+  size: 260,
   stroke: 8,
-  color: 'black'
+  color: '#AAD9A5'
 };

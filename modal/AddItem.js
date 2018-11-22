@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
 },
 
   padder: {
-    marginBottom: 30,
+   marginBottom: 30,
 
   }
-  });
+});
