@@ -1,6 +1,6 @@
 import React from 'react';
 import { SectionList, Image, StyleSheet, Text, View } from 'react-native';
-import { Constants, SvgEllipseProps } from 'expo';
+import { Constants, Svg, EllipseProps } from 'expo';
 import { AreaChart, Grid, ProgressCircle } from 'react-native-svg-charts'
 import PropTypes from 'prop-types';
 
