@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {FlatList, Modal, TouchableHighlight, TouchableOpacity, View, Alert, StyleSheet, Button} from 'react-native';
+import {Modal, TouchableOpacity, View, Alert, StyleSheet} from 'react-native';
 
-import { Container, Header, Title, Content, Footer, FooterTab, Left, Right, Body, Icon, Text, Form, Item, Input, Picker, CheckBox} from 'native-base';
+import { Content, Text, Form, Item, Input, Icon} from 'native-base';
+
+import RadioGroup from 'react-native-radio-buttons-group';
 
 export default class ModalExample extends Component {
 
@@ -15,6 +17,30 @@ export default class ModalExample extends Component {
         modalVisible: false,
         checked: false,
 
+        data: [
+          {
+            label: '1',
+            color: 'blue',
+            action: () => { this.setState({color_category: 'blue'})}
+          }, 
+          {
+            label: '2',
+            color: 'purple',
+            action: () => {this.setState({color_category: 'purple'})}         
+          },
+          {
+            label: '3',
+            color: 'yellow',
+            action: () => {this.setState({color_category: 'yellow'})}
+          }, 
+          {
+            label: '4',
+            color: 'orange',
+            action: () => {this.setState({color_category: 'orange'}) }       
+          }
+      ],
+
+
 
     }
 }
@@ -22,7 +48,6 @@ export default class ModalExample extends Component {
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
   }
-
 
 
   handleSubmit = () => {
@@ -47,7 +72,6 @@ export default class ModalExample extends Component {
   })
   }
 
-
   confirmPost = () => {
     this.handleSubmit()
     this.setModalVisible(!this.state.modalVisible)
@@ -56,29 +80,15 @@ export default class ModalExample extends Component {
 
   render() {
 
-    const buttons = [
-      {
-        text: 'blue',
-        action: () => { this.setState({color_category: 'blue', checked: !this.state.checked})}
-      }, 
-      {
-        text: 'purple',
-        action: () => {this.setState({color_category: 'purple', checked: !this.state.checked})}         
-      },
-      {
-        text: 'yellow',
-        action: () => {this.setState({color_category: 'yellow', checked: !this.state.checked})}
-      }, 
-      {
-        text: 'orange',
-        action: () => {this.setState({color_category: 'orange', checked: !this.state.checked}) }       
-      }
-  ];
+    onPressRadio = data => {
+      let selected = data.filter(data => data.selected)[0]
+      console.log(selected)
 
+      this.setState({ data, color_category: selected.color });
+    }
 
-    const catButtons =  buttons.map(b => {
-      return <CheckBox checked={this.state.checked} key={b.text} color={b.text} text={b.text} onPress={b.action} />;
-    });
+    let selectedButton = this.state.data.find(e => e.selected == true);
+    selectedButton = selectedButton ? selectedButton.value : this.state.data[0].label;
 
     return (
       <View style={styles.container}>
@@ -93,48 +103,36 @@ export default class ModalExample extends Component {
           <Form>
             <Item>
               <Input placeholder="Action" 
-               multiline={true}
+                multiline={true}
+
                 onChangeText={(inputVal) => this.setState({action: inputVal})}
                 value={this.state.action}/>
             </Item>
 
             <View style={styles.row}>
 
-        
-            <Icon name="md-happy"  onPress={() => {
+         
+              <Icon name="md-happy" onPress={() => {
+                 this.setState({redFlag: false});
+              }}/>
+              <Icon name="md-sad" onPress={() => { 
+                    this.setState({redFlag: true});
+              }}/>
+            </View>
 
-
-                  this.setState({redFlag: false});
-                }}
-                ></Icon>
-            <Icon name="md-sad" onPress={() => { 
-                  this.setState({redFlag: true});
-
-                }}
-            ></Icon>
-
-              {catButtons}
+            <View style={styles.row2}>
+              <RadioGroup
+                labelColor='#50C900'
+                flexDirection='row'
+                radioButtons={this.state.data}
+                onPress={onPressRadio} />
 
             </View>
 
-          {/* <View style={styles.row}> */}
-            {/* <CheckBox checked={this.state.checked} onPress={() => { 
-                  this.setState({color_category: 'blue', checked: !this.state.checked});
-                }} color="#03A9F4"/>
-            <CheckBox checked={this.state.checked2} onPress={() => { 
-                  this.setState({color_category: 'purple', checked2: !this.state.checked2});
-                }}color="#673AB7"/>
-            <CheckBox  checked={this.state.checked3} onPress={() => { 
-                  this.setState({color_category: 'yellow', checked3: !this.state.checked3});
-                }} color="#FCCB00"/>
-            <CheckBox checked={this.state.checked4} onPress={() => { 
-                  this.setState({color_category: 'orange', checked4: !this.state.checked4});
-                }} color="#FF9800"/> */}
-                {/* </View> */}
-
-            <Item>
+            <Item style={styles.padder}>
             <Input 
-              placeholder="Description"  
+              placeholder="Description" 
+         
               multiline={true}
               onChangeText={(inputVal) => this.setState({description: inputVal})}
               value={this.state.description} 
@@ -199,21 +197,29 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    // height: 30,
+    padding: 10,
     width: 130,
+    lineHeight: 15,
+    fontSize: 60,
     textAlign: 'center',
     alignItems: 'center',
     backgroundColor: '#AAD9A5',
     borderRadius: 10,
   },
   row: {
-      padding: 20,
+  
       flexDirection: 'row',
       alignItems: 'center',
   },
+  row2: {
+    paddingBottom: 20,
+    paddingLeft: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+},
 
-  background: {
-    backgroundColor:"green",
+  padder: {
+    marginBottom: 30,
 
   }
   });
