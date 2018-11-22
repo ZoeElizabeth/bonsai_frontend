@@ -116,6 +116,7 @@ export default class ModalExample extends Component {
                  this.setState({redFlag: false});
               }}/>
               <Icon name="md-sad" onPress={() => { 
+                    color="green"
                     this.setState({redFlag: true});
               }}/>
             </View>

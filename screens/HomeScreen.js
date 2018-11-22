@@ -18,6 +18,8 @@ import { MonoText } from '../components/StyledText';
 import AddItem from '../modal/AddItem';
 import image from '../tree_img/export.js';
 import Processgraph from '../charts/progress_circle';
+import {  Icon} from 'native-base';
+
 
 
 export default class HomeScreen extends React.Component {
@@ -46,6 +48,20 @@ export default class HomeScreen extends React.Component {
   }
 
 
+itemList = (item) => {
+
+  if (!item.redFlag){
+    return ( <View style={styles.contentContainer}><Icon style={styles.icon}  type="FontAwesome" name="circle"></Icon>
+     <Text style={styles.fonty}>{item.action_title}, {item.color_category}</Text>
+    </View>)
+  }
+  return  ( <View style={styles.contentContainer}><Icon style={styles.icon2}  type="FontAwesome" name="circle"></Icon>
+  <Text style={styles.fonty}>{item.action_title}, {item.color_category}</Text>
+ </View>)
+
+
+}
+
   render() {
 
 
@@ -54,26 +70,32 @@ export default class HomeScreen extends React.Component {
       
       <View style={styles.container}>
 
-          <Text style={styles.tabBarInfoText} >Welcome Back to Bonsai</Text> 
-       
-        <ImageBackground style={styles.tree_imgs} source={image.tree_30} />
-        <Processgraph/> 
-        <View style={styles.center} > 
-        <AddItem />  
+          <Text style={styles.tabBarInfoText} >Welcome to Bonsai</Text> 
+
+        <View style={styles.tree_graph}>
+          <ImageBackground style={styles.tree_imgs} source={image.tree_30} />
+          <Processgraph/> 
         </View>
+        
+        <View style={styles.center} > 
+          <AddItem />  
+        </View>
+      
+       
         <ScrollView contentContainerStyle={styles.contentContainer}>
 
 
-        
+     
      
         <FlatList
           extraData={this.state}
           data={this.state.dataSource}
-          renderItem={({item}) => <Text style={styles.contentContainer}>{item.redFlag ? 'o' : 't'}, {item.action_title}, {item.color_category}</Text>}
+          renderItem={({item}) => this.itemList(item) }
           keyExtractor={({id}, index) => id.toString()}
           />
+      
         </ScrollView>
-      </View>
+        </View>
       
     );
   }
@@ -119,10 +141,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   contentContainer: {
-    paddingTop: 22,
+    top: 25,
+    paddingTop: 13,
     paddingLeft: 10,
     textAlign: 'left',
+    alignItems: 'center',
     fontSize: 18,
+    color: 'black',
+    flexDirection: 'row',
+    // alignItems: 'center'
   },
 
   tabBarInfoContainer: {
@@ -153,19 +180,33 @@ const styles = StyleSheet.create({
 
   },
   tree_imgs: {
-    top: 105,
+    top: 45,
     flex: 1,
     height: 200,
-    overflow: 'visible',
+    // overflow: 'visible',
 
   },
   center: {
-    paddingTop: 20,
+    top: 65,
     alignItems: 'center',
   },
-  circle: {
-    width: 100,
-    height: 100,
-    borderRadius: 100/2
-}
+  tree_graph: {
+    top: 60,
+  // position: 'absolute',
+  },
+  icon:{
+    paddingRight: 10,
+    color: 'green',
+    fontSize: 10,
+  },
+  icon2:{
+    paddingRight: 10,
+    fontSize: 10,
+    color: 'red',
+  },
+  fonty:{
+    color: 'black',
+    fontSize: 18,
+
+  }
 });
