@@ -57,7 +57,7 @@ export default class ModalExample extends Component {
     const color_category = this.state.color_category;
     console.log('value: ', action, description, redFlag, color_category);
 
-    fetch('http://localhost:8080/dayli_list/1/actions', {
+    return fetch('http://localhost:8080/dayli_list/1/actions', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -70,12 +70,23 @@ export default class ModalExample extends Component {
       color_category: color_category,
     }),
   })
+
   }
 
+
   confirmPost = () => {
+   
+
     this.handleSubmit()
-    this.setModalVisible(!this.state.modalVisible)
-  }
+    .then(() => {
+    this.props.fetching();
+    });
+    this.setModalVisible(!this.state.modalVisible);
+   
+
+}
+
+
 
 
   render() {
@@ -133,7 +144,6 @@ export default class ModalExample extends Component {
             <Item style={styles.padder}>
             <Input 
               placeholder="Description" 
-         
               multiline={true}
               onChangeText={(inputVal) => this.setState({description: inputVal})}
               value={this.state.description} 
@@ -194,14 +204,16 @@ const styles = StyleSheet.create({
     },
 
   buttonFont: {
+    fontWeight: 'bold',
+    fontSize: 18,
     color: '#fff',
   },
 
   button: {
-    padding: 10,
+    padding: 8,
     width: 130,
     lineHeight: 15,
-    fontSize: 60,
+
     textAlign: 'center',
     alignItems: 'center',
     backgroundColor: '#AAD9A5',

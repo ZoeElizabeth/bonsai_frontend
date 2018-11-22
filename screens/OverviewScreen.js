@@ -10,7 +10,6 @@ export default class OverviewScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-    
         <OverviewView/>
       </ScrollView>
     );

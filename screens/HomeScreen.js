@@ -16,6 +16,7 @@ import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 import AddItem from '../modal/AddItem';
+import Description from './Description.js';
 import image from '../tree_img/export.js';
 import Processgraph from '../charts/progress_circle';
 import {  Icon} from 'native-base';
@@ -29,27 +30,35 @@ export default class HomeScreen extends React.Component {
 
   constructor(props){
     super(props);
-    this.state ={ isLoading: true}
+    this.state ={ 
+      isLoading: true,
+      dataSource: [],
+      
+    }
+    this.fetching = this.fetching.bind(this);
   }
 
   componentDidMount(){
-    return fetch('http://localhost:8080/dayli_list/1/actions')
-      .then((response) => response.json())
-      .then((responseJson) => {
-            console.log(responseJson)
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson,
-        });
-      })
-      .catch((error) =>{
-        console.error(error);
-      });
+    this.fetching()
   }
 
 
-itemList = (item) => {
+  fetching = () => {
+    return fetch('http://localhost:8080/dayli_list/1/actions')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({
+        isLoading: false,
+        dataSource: responseJson.reverse(),
+      });
+    })
+    .catch((error) =>{
+      console.error(error);
+    });
+  }
 
+itemList = (item) => {
+console.log("start", this.state.dataSource, "source")
   if (!item.redFlag){
     return ( <View style={styles.contentContainer}><Icon style={styles.icon}  type="FontAwesome" name="circle"></Icon>
      <Text style={styles.fonty}>{item.action_title}, {item.color_category}</Text>
@@ -76,11 +85,11 @@ itemList = (item) => {
           <ImageBackground style={styles.tree_imgs} source={image.tree_30} />
           <Processgraph/> 
         </View>
-        
+     
         <View style={styles.center} > 
-          <AddItem />  
+          <AddItem fetching={this.fetching}/>  
         </View>
-      
+      <Description/>
        
         <ScrollView contentContainerStyle={styles.contentContainer}>
         <FlatList
