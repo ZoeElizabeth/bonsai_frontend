@@ -15,6 +15,7 @@ export default class ModalExample extends Component {
         redFlag: true,
         color_category: '',
         modalVisible: false,
+        showModal: false,
 
         data: [
           {
@@ -79,12 +80,9 @@ export default class ModalExample extends Component {
     .then(() => {
     this.props.fetching();
     });
-    this.setModalVisible(!this.state.modalVisible);
-   
+    this.setState({ showModal: false, });
 
 }
-
-
 
 
   render() {
@@ -101,19 +99,13 @@ export default class ModalExample extends Component {
 
     return (
       <View style={styles.container}>
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-          Alert.alert('Modal has been closed.');}}>
-
+      
+        {this.state.showModal ? 
         <Content style={styles.containerPop}>
           <Form>
             <Item>
               <Input placeholder="Action" 
                 multiline={true}
-
                 onChangeText={(inputVal) => this.setState({action: inputVal})}
                 value={this.state.action}/>
             </Item>
@@ -161,7 +153,8 @@ export default class ModalExample extends Component {
             <TouchableOpacity
               style={styles.button}
               onPress={() => {
-              this.setModalVisible(!this.state.modalVisible);}}>
+                this.setState({showModal: !this.state.showModal})
+                }}>
                 <Text style={styles.buttonFont}>
                 Close
                 </Text>
@@ -172,15 +165,15 @@ export default class ModalExample extends Component {
                 
 
   
-        </Modal>
-        <TouchableOpacity style={styles.button}
-           onPress={() => {
-            this.setModalVisible(true);
-          }}>
-            <Text style={styles.buttonFont}>
-               Add Item
-             </Text>
-            </TouchableOpacity >
+
+        : <TouchableOpacity style={styles.button}
+        onPress={() => {
+         this.setState({showModal: !this.state.showModal});
+       }}>
+         <Text style={styles.buttonFont}>
+            Add Item
+          </Text>
+         </TouchableOpacity >}
 
       </View>
     );
@@ -190,13 +183,14 @@ export default class ModalExample extends Component {
 const styles = StyleSheet.create({
 
   container: {
+  
     backgroundColor: '#fff',
   },
 
   containerPop: {
-    marginTop: 50,
-    padding: 20,
-    paddingTop: 220,
+    bottom: 0,
+    // padding: 20,
+    paddingTop: 0,
     backgroundColor: '#ffffff',
     },
 

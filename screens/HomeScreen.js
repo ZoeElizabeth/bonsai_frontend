@@ -10,9 +10,10 @@ import {
   Button,
   Fetch, 
   FlatList,
-  ImageBackground
+  ImageBackground,
+
 } from 'react-native';
-import { WebBrowser } from 'expo';
+import { WebBrowser, } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 import AddItem from '../modal/AddItem';
@@ -33,6 +34,7 @@ export default class HomeScreen extends React.Component {
       isLoading: true,
       dataSource: [],
       currentAction: '',
+      showModal: false,
       
     }
     this.fetching = this.fetching.bind(this);
@@ -41,8 +43,28 @@ export default class HomeScreen extends React.Component {
 
   //Toggles the description based on item/actions.id
   handlePress(id, item){
+console.log(id, "id")
+
+if (id === this.state.currentAction){
+
+  console.log(this.state.currentAction, "view")
     this.setState({
-      currentAction: id,
+      currentAction: '',
+
+    });
+  } else {
+  this.setState({
+    currentAction: id,
+
+  });
+}
+
+  }
+
+
+  handleclose(){
+    this.setState({
+      currentAction: '',
 
     });
   }
@@ -70,7 +92,7 @@ export default class HomeScreen extends React.Component {
     if (!item.redFlag){
       return ( 
       <View>
-        <View style={styles.contentContainer}>
+        <View style={styles.row}>
           <Icon style={styles.icon}  type="FontAwesome" name="circle"></Icon>
           <Button 
             color="#538B9C"
@@ -83,7 +105,7 @@ export default class HomeScreen extends React.Component {
     </View>)
     }
     return ( <View>
-      <View style={styles.contentContainer}>
+      <View style={styles.row}>
         <Icon style={styles.icon2}  type="FontAwesome" name="circle"></Icon>
         <Button 
           color="#538B9C"
@@ -111,22 +133,22 @@ export default class HomeScreen extends React.Component {
           <ImageBackground style={styles.tree_imgs} source={image.tree_30} />
           <Processgraph/> 
         </View>
-     
+    
+
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+
         <View style={styles.center} > 
           <AddItem fetching={this.fetching}/>  
         </View>
- 
-       
-        <ScrollView contentContainerStyle={styles.contentContainer}>
 
-      
+
         <FlatList
           extraData={this.state}
           data={this.state.dataSource}
           renderItem={({item}) => this.itemList(item) }
           keyExtractor={({id}, index) => id.toString()}/>
-      
         </ScrollView>
+   
         </View>
       
     );
@@ -166,13 +188,12 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingTop: 13,
-    paddingLeft: 10,
-    textAlign: 'left',
-    alignItems: 'center',
+    // paddingLeft: 10,
+
+    // alignItems: 'center',
     fontSize: 18,
     color: 'black',
-    flexDirection: 'row',
-
+    // flexDirection: 'row',
   },
 
   tree_imgs: {
@@ -194,12 +215,14 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     color: 'green',
     fontSize: 10,
+    alignItems: 'center',
   },
 
   icon2:{
     paddingRight: 10,
     fontSize: 10,
     color: 'red',
+    alignItems: 'center',
   },
 
   fonty:{
@@ -240,5 +263,13 @@ const styles = StyleSheet.create({
     paddingLeft: 45,
     color: '#2e5a68',
     fontSize: 15,
-  }
+  },
+  row: {
+    paddingLeft: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    textAlign: 'left',
+    fontSize: 18,
+    color: 'black',
+},
 });
