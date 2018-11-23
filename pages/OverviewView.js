@@ -4,7 +4,7 @@ import { Constants, Svg, EllipseProps } from 'expo';
 import { PieChart } from 'react-native-svg-charts'
 import PropTypes from 'prop-types';
 
-export default class DynamicPieChart extends React.Component {
+export default class OverviewViewPie extends React.Component {
 
     render() {
 
