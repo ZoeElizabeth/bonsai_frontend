@@ -11,8 +11,13 @@ export default class Description extends React.Component {
       dataSource: 'here',
     
     }
-    }
-   
+  }
+  
+  // user = (user) => {
+  //   console.log(user.name)
+  // }
+
+ 
   render() {
 
     fetching = () => {
