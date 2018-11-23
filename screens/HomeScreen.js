@@ -64,7 +64,7 @@ export default class HomeScreen extends React.Component {
         console.error(error);
       });
     }
-
+    //small change 
   //Rendering list items to show if they are a red or green action
   itemList = (item) => {
     if (!item.redFlag){
@@ -118,6 +118,8 @@ export default class HomeScreen extends React.Component {
  
        
         <ScrollView contentContainerStyle={styles.contentContainer}>
+
+      
         <FlatList
           extraData={this.state}
           data={this.state.dataSource}
