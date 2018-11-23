@@ -15,7 +15,6 @@ export default class ModalExample extends Component {
         redFlag: true,
         color_category: '',
         modalVisible: false,
-        checked: false,
 
         data: [
           {
@@ -36,6 +35,7 @@ export default class ModalExample extends Component {
           {
             label: '4',
             color: 'orange',
+            labelColor: '#ffffff',
             action: () => {this.setState({color_category: 'orange'}) }       
           }
       ],
@@ -55,7 +55,6 @@ export default class ModalExample extends Component {
     const description = this.state.description;
     const redFlag = this.state.redFlag
     const color_category = this.state.color_category;
-    console.log('value: ', action, description, redFlag, color_category);
 
     return fetch('http://localhost:8080/dayli_list/1/actions', {
     method: 'POST',
@@ -76,7 +75,6 @@ export default class ModalExample extends Component {
 
   confirmPost = () => {
    
-
     this.handleSubmit()
     .then(() => {
     this.props.fetching();
@@ -99,7 +97,7 @@ export default class ModalExample extends Component {
     }
 
     let selectedButton = this.state.data.find(e => e.selected == true);
-    selectedButton = selectedButton ? selectedButton.value : this.state.data[0].label;
+    selectedButton = selectedButton ? selectedButton.value : '';
 
     return (
       <View style={styles.container}>
@@ -134,11 +132,10 @@ export default class ModalExample extends Component {
 
             <View style={styles.row2}>
               <RadioGroup
-                labelColor='#50C900'
+                style={styles.radio}
                 flexDirection='row'
                 radioButtons={this.state.data}
                 onPress={onPressRadio} />
-
             </View>
 
             <Item style={styles.padder}>
@@ -172,7 +169,7 @@ export default class ModalExample extends Component {
           </View>
         </Content>
    
-
+                
 
   
         </Modal>
@@ -210,18 +207,18 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    padding: 8,
+    padding: 6,
+    margin: 20,
+    marginTop: 10,
     width: 130,
-    lineHeight: 15,
-
     textAlign: 'center',
     alignItems: 'center',
     backgroundColor: '#AAD9A5',
     borderRadius: 10,
   },
   row: {
-  
       flexDirection: 'row',
+      justifyContent: 'center',
       alignItems: 'center',
   },
   row2: {
@@ -229,10 +226,15 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     flexDirection: 'row',
     alignItems: 'center',
+    color: '#fff',
 },
 
   padder: {
    marginBottom: 30,
+
+  },
+  radio: {
+    color: "#fff",
 
   }
 });

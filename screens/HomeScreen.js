@@ -16,10 +16,9 @@ import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 import AddItem from '../modal/AddItem';
-import Description from './Description.js';
 import image from '../tree_img/export.js';
 import Processgraph from '../charts/progress_circle';
-import {  Icon} from 'native-base';
+import { Icon} from 'native-base';
 
 
 
@@ -33,11 +32,25 @@ export default class HomeScreen extends React.Component {
     this.state ={ 
       isLoading: true,
       dataSource: [],
+      currentAction: '',
+      // showDescription: false,
+      // item[id]: false,
       
     }
     this.fetching = this.fetching.bind(this);
+    this.handlePress = this.handlePress.bind(this);
   }
 
+  handlePress(id, item){
+
+
+
+    this.setState({
+      currentAction: id,
+  
+
+    });
+  }
   componentDidMount(){
     this.fetching()
   }
@@ -58,15 +71,40 @@ export default class HomeScreen extends React.Component {
   }
 
 itemList = (item) => {
-console.log("start", this.state.dataSource, "source")
   if (!item.redFlag){
-    return ( <View style={styles.contentContainer}><Icon style={styles.icon}  type="FontAwesome" name="circle"></Icon>
-     <Text style={styles.fonty}>{item.action_title}, {item.color_category}</Text>
-    </View>)
+    // console.log("starting herererere", this.state, "stateeee")
+    // console.log(this.state.item)
+    return ( 
+    <View>
+      <View style={styles.contentContainer}>
+        <Icon style={styles.icon}  type="FontAwesome" name="circle"></Icon>
+        <Button 
+          color="#538B9C"
+          title="Test Title"
+          onPress={this.handlePress.bind(this, item.id)}> 
+        </Button>
+      </View>
+
+
+ {this.state.currentAction === item.id ? <Text style={styles.description}  id={item.id}>{item.description}</Text> : null}
+  </View>
+    )
   }
-  return  ( <View style={styles.contentContainer}><Icon style={styles.icon2}  type="FontAwesome" name="circle"></Icon>
-  <Text style={styles.fonty}>{item.action_title}, {item.color_category}</Text>
- </View>)
+  return ( <View>
+    <View style={styles.contentContainer}>
+      <Icon style={styles.icon2}  type="FontAwesome" name="circle"></Icon>
+      <Button 
+        color="#538B9C"
+        title={item.action_title} 
+        onPress={this.handlePress.bind(this, item.id)}> 
+      </Button>
+
+    </View>
+
+
+   {this.state.currentAction === item.id ? <Text style={styles.description} id={item.id}>{item.description}</Text> : null}
+ 
+</View>)
 
 
 }
@@ -89,7 +127,7 @@ console.log("start", this.state.dataSource, "source")
         <View style={styles.center} > 
           <AddItem fetching={this.fetching}/>  
         </View>
-      <Description/>
+ 
        
         <ScrollView contentContainerStyle={styles.contentContainer}>
         <FlatList
@@ -97,6 +135,8 @@ console.log("start", this.state.dataSource, "source")
           data={this.state.dataSource}
           renderItem={({item}) => this.itemList(item) }
           keyExtractor={({id}, index) => id.toString()}
+         
+          
           />
       
         </ScrollView>
@@ -153,6 +193,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'black',
     flexDirection: 'row',
+
   },
 
   tree_imgs: {
@@ -211,4 +252,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
 
   },
+    description: {
+      paddingLeft: 45,
+      color: '#2e5a68',
+      fontSize: 15,
+    }
 });
