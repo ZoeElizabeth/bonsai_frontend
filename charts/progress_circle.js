@@ -27,7 +27,6 @@ export default class ProcessGraph extends React.Component {
         isLoading: false,
         dataSource: responseJson[0].greenPoints,
       });
-      console.log(this.state.dataSource)
     })
     .catch((error) =>{
       console.error(error);

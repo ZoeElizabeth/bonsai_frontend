@@ -64,7 +64,7 @@ export default class HomeScreen extends React.Component {
         console.error(error);
       });
     }
-    //small change 
+
   //Rendering list items to show if they are a red or green action
   itemList = (item) => {
     if (!item.redFlag){
@@ -74,7 +74,7 @@ export default class HomeScreen extends React.Component {
           <Icon style={styles.icon}  type="FontAwesome" name="circle"></Icon>
           <Button 
             color="#538B9C"
-            title="Test Title"
+            title={item.action_title} 
             onPress={this.handlePress.bind(this, item.id)}> 
           </Button>
         </View>
