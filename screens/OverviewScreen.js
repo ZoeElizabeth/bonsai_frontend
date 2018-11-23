@@ -11,8 +11,8 @@ export default class OverviewScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <OverviewViewPie />
-        <GraphChart  />
+        <OverviewViewPie/>
+        <GraphChart/>
       </ScrollView>
     );
   }
