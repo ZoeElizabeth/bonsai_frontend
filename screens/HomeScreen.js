@@ -32,35 +32,25 @@ export default class HomeScreen extends React.Component {
     super(props);
     this.state ={ 
       isLoading: true,
-      dataSource: [],
+      actionSource: [], // List of all actions
       currentAction: '',
       showModal: false,
-      
     }
-    this.fetching = this.fetching.bind(this);
+    this.fetchActions = this.fetchActions.bind(this);
     this.handlePress = this.handlePress.bind(this);
   }
 
   //Toggles the description based on item/actions.id
   handlePress(id, item){
-console.log(id, "id")
+    if (id === this.state.currentAction){
 
-if (id === this.state.currentAction){
-
-  console.log(this.state.currentAction, "view")
-    this.setState({
-      currentAction: '',
-
-    });
-  } else {
-  this.setState({
-    currentAction: id,
-
-  });
-}
-
+      this.setState({
+        currentAction: ''});
+    } else {
+      this.setState({
+        currentAction: id,});
+    }
   }
-
 
   handleclose(){
     this.setState({
@@ -69,23 +59,28 @@ if (id === this.state.currentAction){
     });
   }
   componentDidMount(){
-    this.fetching()
+    this.fetchActions()  
   }
 
-  //Function used for fetching user actions, can be passed as props.
-    fetching = () => {
-      return fetch('http://localhost:8080/dayli_list/1/actions')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson.reverse(),
-        });
-      })
-      .catch((error) =>{
-        console.error(error);
+  dailyListActions(dayli_list_id, actions) {
+    //grabbing daily list id  from action and comparing to a lists id
+    return actions.filter(action => action.dayli_list_id === dayli_list_id);
+  }
+
+  fetchActions = () => {
+  
+    return fetch('http://localhost:8080/user/1/actions')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({
+        isLoading: false,
+        actionSource: responseJson,
       });
-    }
+    })
+    .catch((error) =>{
+      console.error(error);
+    });
+  }
 
   //Rendering list items to show if they are a red or green action
   itemList = (item) => {
@@ -117,13 +112,12 @@ if (id === this.state.currentAction){
     {this.state.currentAction === item.id ? <Text style={styles.description} id={item.id}>{item.description}</Text> : null}
   
   </View>)
-
-
   }
 
   render() {
-
-
+    // TODO: Don't hard-code first parameter.
+    //       It should be a dynamic daily list ID.
+    const dailyActions = this.dailyListActions(1, this.state.actionSource);
 
     return (
       
@@ -131,25 +125,22 @@ if (id === this.state.currentAction){
         <Text style={styles.tabBarInfoText}>Welcome to Bonsai</Text> 
         <View style={styles.tree_graph}>
           <ImageBackground style={styles.tree_imgs} source={image.tree_30} />
-          <Processgraph/> 
+          <Processgraph actionSource={dailyActions}/> 
         </View>
-    
+
+        <View style={styles.center} > 
+          <AddItem fetchActions={this.fetchActions} />  
+        </View>
 
         <ScrollView contentContainerStyle={styles.contentContainer}>
 
-        <View style={styles.center} > 
-          <AddItem fetching={this.fetching}/>  
-        </View>
-
-
-        <FlatList
-          extraData={this.state}
-          data={this.state.dataSource}
+        <FlatList 
+          data={dailyActions.reverse()}
           renderItem={({item}) => this.itemList(item) }
           keyExtractor={({id}, index) => id.toString()}/>
         </ScrollView>
    
-        </View>
+      </View>
       
     );
   }
@@ -188,12 +179,8 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingTop: 13,
-    // paddingLeft: 10,
-
-    // alignItems: 'center',
     fontSize: 18,
     color: 'black',
-    // flexDirection: 'row',
   },
 
   tree_imgs: {
@@ -213,7 +200,7 @@ const styles = StyleSheet.create({
 
   icon:{
     paddingRight: 10,
-    color: 'green',
+    color: '#70B879',
     fontSize: 10,
     alignItems: 'center',
   },
@@ -221,7 +208,7 @@ const styles = StyleSheet.create({
   icon2:{
     paddingRight: 10,
     fontSize: 10,
-    color: 'red',
+    color: '#FFA0A0',
     alignItems: 'center',
   },
 
@@ -258,14 +245,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
 
   },
-
   description: {
-    paddingLeft: 45,
+    paddingLeft: 65,
     color: '#2e5a68',
     fontSize: 15,
+    
   },
   row: {
-    paddingLeft: 10,
+    paddingLeft: 30,
     flexDirection: 'row',
     alignItems: 'center',
     textAlign: 'left',
