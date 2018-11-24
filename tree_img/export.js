@@ -31,6 +31,7 @@ const images = {
   tree_30: require('./30.jpg'),
   stickers: require('./all_stickers.png'),
   ///you can add more many images like this here.
+  kanye: require('./kanye.jpg'),
 };
 
 module.exports = images;
