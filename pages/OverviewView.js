@@ -15,7 +15,7 @@ export default class OverviewView extends React.Component {
         return (
             <View>
             <PieChart/>
-            < GraphChart/>
+            <GraphChart/>
             </View>
         )
     }
