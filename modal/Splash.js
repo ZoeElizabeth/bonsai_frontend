@@ -59,7 +59,7 @@ export default class Splash extends Component {
                     this.setModalVisible(false);
                   }}>
 
-                  <Text>Login</Text>
+                  <Text style={{color: '#538B9C'}}>Login</Text>
 
                 </TouchableHighlight>
 
@@ -68,7 +68,7 @@ export default class Splash extends Component {
                   onPress={() => {
                     this.setModalVisible(false);
                   }}>
-                  <Text>Register</Text>
+                  <Text style={{color: '#538B9C'}}>Register</Text>
 
                 </TouchableHighlight>
               </View>
@@ -94,15 +94,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     alignItems: 'center',
     marginTop: 100,
-
+  
     fontSize: 35,
   },
   button: {
-    padding: 6,
+    padding: 3,
     marginLeft: 20,
     alignItems: 'center',
     marginTop: 25,
-    width: 100 ,
+    width: 80 ,
     backgroundColor: '#AAD9A5',
     borderRadius: 10,
   },
