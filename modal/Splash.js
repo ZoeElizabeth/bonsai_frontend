@@ -6,7 +6,7 @@ import bg from '../emoji/emoji.js';
 
 export default class Splash extends Component {
   state = {
-    modalVisible: false,
+    modalVisible: true,
     username: '',
     password:'',
   };
