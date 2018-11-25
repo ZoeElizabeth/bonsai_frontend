@@ -10,12 +10,15 @@ export default class ProcessGraph extends React.Component {
     super(props);
     this.state ={ 
       isLoading: true,
+      actionSource: [],
     }
     this.greenPoints = () => this.props.actionSource.filter(action => !action.redFlag).length;
     this.redPoints = () => this.props.actionSource.filter(action => action.redFlag).length;
   }
 
+
   render() {
+
 
     return(
 

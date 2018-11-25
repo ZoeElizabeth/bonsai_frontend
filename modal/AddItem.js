@@ -3,7 +3,6 @@ import {Modal, TouchableOpacity, View, Alert, StyleSheet, Image} from 'react-nat
 import { Content, Text, Form, Item, Input, Icon} from 'native-base';
 import RadioGroup from 'react-native-radio-buttons-group';
 import emoji from '../emoji/emoji.js';
-import progresscircle from '../charts/progress_circle';
 
 export default class ModalExample extends Component {
 
@@ -132,7 +131,6 @@ export default class ModalExample extends Component {
                   colorBG: '#70B879',
                   colorBG2: '#fff',
                   redFlag: false});
-                  console.log(this.state.redFlag)
         
               }} > 
               <Image

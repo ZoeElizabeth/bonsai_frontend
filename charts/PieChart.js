@@ -32,12 +32,7 @@ export default class OverviewViewPie extends React.Component {
 			}
 			
 			componentDidMount() {
-
-				this.fetchActions()    
-				// .then(() => 
-				// this.grabCategories()
-				// )
-				
+				this.fetchActions()   	
 			}
 
 
@@ -46,45 +41,6 @@ export default class OverviewViewPie extends React.Component {
         return actions.filter(action => action.dayli_list_id === dayli_list_id);
 			}
 
-		
-			
-			// grabCategories() {
-			// 	const dailyActions = this.dailyListActions(1, this.state.actionSource);
-			// 	let orange_cat = [];
-			// 	let blue_cat = [];
-			// 	let purple_cat = [];
-			// 	let yellow_cat = [];
-			// 	let green_cat = [];
-			// 	let red_cat = [];
-
-			// 	dailyActions.forEach(function(actions) {
-					
-			// 		if (!actions.redFlag) {
-			// 			green_cat.push(actions)
-			// 		} else {
-			// 			red_cat.push(actions)
-			// 		}
-			// 	});
-			
-
-
-			// 	dailyActions.forEach(function(actions) {
-			
-			// 		if (actions.color_category === 'blue') {
-			// 			blue_cat.push(actions)
-			// 		} if (actions.color_category === 'orange') {
-			// 			orange_cat.push(actions)
-			// 		} if (actions.color_category === 'purple') {
-			// 			purple_cat.push(actions)
-			// 		} if (actions.color_category === 'yellow') {
-			// 			yellow_cat.push(actions)
-			// 		}
-
-				
-			// 	});
-					
-				
-			// }
 			
     render() {
 
@@ -105,8 +61,6 @@ export default class OverviewViewPie extends React.Component {
 					red_cat.push(actions)
 				}
 			});
-		
-			console.log( red_cat.length, green_cat.length)
 
 			dailyActions.forEach(function(actions) {
 		
@@ -120,43 +74,40 @@ export default class OverviewViewPie extends React.Component {
 					yellow_cat.push(actions)
 				}
 			});
-				
-      
-
 		
-
         const data = [
             {
                 key: 1,
                 amount: green_cat.length,
-                svg: { fill: 'green' },
+                svg: { fill: '#70B879' },
             },
             {
                 key: 2,
                 amount: red_cat.length,
-                svg: { fill: 'red' }
+                svg: { fill: '#FFA0A0' }
             },
             {
                 key: 3,
                 amount: yellow_cat.length,
-                svg: { fill: 'yellow' }
+                svg: { fill: '#FCDF15' }
             },
             {
                 key: 4,
                 amount: orange_cat.length,
-                svg: { fill: 'orange' }
+                svg: { fill: '#FCB54D' }
             },
             {
                 key: 5,
                 amount: purple_cat.length,
-                svg: { fill: 'purple' }
+                svg: { fill: '#9A60F7' }
             },
             {
                 key: 6,
                 amount: blue_cat.length,
-                svg: {fill: 'blue'}
+                svg: {fill: '#4FBCFC'}
             }
-        ]
+				]
+				
 
 
         return (
