@@ -4,7 +4,7 @@ import { Content, Text, Form, Item, Input, Icon} from 'native-base';
 import RadioGroup from 'react-native-radio-buttons-group';
 import emoji from '../emoji/emoji.js';
 
-export default class ModalExample extends Component {
+export default class AddItem extends Component {
 
   constructor(props) {
     super(props);
