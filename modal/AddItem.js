@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {Modal, TouchableOpacity, View, Alert, StyleSheet} from 'react-native';
-
+import {Modal, TouchableOpacity, View, Alert, StyleSheet, Image} from 'react-native';
 import { Content, Text, Form, Item, Input, Icon} from 'native-base';
-
 import RadioGroup from 'react-native-radio-buttons-group';
+import emoji from '../emoji/emoji.js';
 
 export default class ModalExample extends Component {
 
@@ -12,42 +11,47 @@ export default class ModalExample extends Component {
     this.state = {
         action: '',
         description: '', 
-        redFlag: true,
-        color_category: '',
+        redFlag: null,
+        color_category: '',           
         modalVisible: false,
+        showModal: false,
+        colorBG: '#fff',
+        colorBG2: '#fff',
+        inputVal: '',
+    
 
         data: [
           {
+            label: '0',
+            color: '#ffffff',
+            action: ''
+          }, 
+          {
             label: '1',
-            color: 'blue',
-            action: () => { this.setState({color_category: 'blue'})}
+            color: '#4FBCFC',
+            action:'blue'
           }, 
           {
             label: '2',
-            color: 'purple',
-            action: () => {this.setState({color_category: 'purple'})}         
+            color: '#9A60F7',
+            action: 'purple'        
           },
           {
             label: '3',
-            color: 'yellow',
-            action: () => {this.setState({color_category: 'yellow'})}
+            color: '#FCDF15',
+            action: 'yellow'
           }, 
           {
             label: '4',
-            color: 'orange',
+            color: '#FCB54D',
             labelColor: '#ffffff',
-            action: () => {this.setState({color_category: 'orange'}) }       
+            action:'orange'       
           }
       ],
-
-
-
     }
 }
 
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-  }
+  
 
 
   handleSubmit = () => {
@@ -55,6 +59,7 @@ export default class ModalExample extends Component {
     const description = this.state.description;
     const redFlag = this.state.redFlag
     const color_category = this.state.color_category;
+
 
     return fetch('http://localhost:8080/dayli_list/1/actions', {
     method: 'POST',
@@ -67,33 +72,31 @@ export default class ModalExample extends Component {
       description: description,
       redFlag: redFlag,
       color_category: color_category,
+
     }),
+
   })
-
   }
-
 
   confirmPost = () => {
    
     this.handleSubmit()
     .then(() => {
-    this.props.fetching();
+
+    this.props.fetchActions();
+
     });
-    this.setModalVisible(!this.state.modalVisible);
-   
-
+    this.setState({ showModal: false,
+    action: '',
+    description: '' });
 }
-
-
 
 
   render() {
 
     onPressRadio = data => {
       let selected = data.filter(data => data.selected)[0]
-      console.log(selected)
-
-      this.setState({ data, color_category: selected.color });
+      this.setState({data, color_category: selected.action});
     }
 
     let selectedButton = this.state.data.find(e => e.selected == true);
@@ -101,43 +104,72 @@ export default class ModalExample extends Component {
 
     return (
       <View style={styles.container}>
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-          Alert.alert('Modal has been closed.');}}>
-
-        <Content style={styles.containerPop}>
+      
+        {this.state.showModal ? 
+        <View style={styles.containerPop}>
           <Form>
             <Item>
               <Input placeholder="Action" 
                 multiline={true}
-
                 onChangeText={(inputVal) => this.setState({action: inputVal})}
                 value={this.state.action}/>
             </Item>
 
             <View style={styles.row}>
 
-         
-              <Icon name="md-happy" onPress={() => {
-                 this.setState({redFlag: false});
-              }}/>
-              <Icon name="md-sad" onPress={() => { 
-                    color="green"
-                    this.setState({redFlag: true});
-              }}/>
-            </View>
+             <TouchableOpacity 
+                style={{
+                margin: 5,
+                marginLeft: 15,
+                marginBottom:0,
+                padding: 5, 
+                borderRadius: 50,
+                backgroundColor: this.state.colorBG}}
+              onPress={() => {
+               
+                 this.setState({
+                  colorBG: '#70B879',
+                  colorBG2: '#fff',
+                  redFlag: false});
+        
+              }} > 
+              <Image
+               style={{width: 30, height: 30}} 
+              source={emoji.happy} />
+              </TouchableOpacity >
 
+             <TouchableOpacity 
+            
+               style={{
+                marginBottom:0,
+                margin: 5,
+                padding: 5, 
+                borderRadius: 50,
+                backgroundColor: this.state.colorBG2}}
+              onPress={() => {
+       
+                 this.setState({
+                  colorBG2: '#FFA0A0',
+                  colorBG: '#fff',
+                  redFlag: true});
+              
+              }}> 
+
+              <Image
+              style={{width: 30, height: 30}} 
+              source={emoji.dull} />
+              </TouchableOpacity >
+              </View>
+
+    
             <View style={styles.row2}>
               <RadioGroup
-                style={styles.radio}
-                flexDirection='row'
+                labelColor="#fff"
+                flexDirection='row-reverse'
                 radioButtons={this.state.data}
                 onPress={onPressRadio} />
             </View>
-
+         
             <Item style={styles.padder}>
             <Input 
               placeholder="Description" 
@@ -146,6 +178,7 @@ export default class ModalExample extends Component {
               value={this.state.description} 
                />
             </Item>
+
   
           </Form>
 
@@ -161,26 +194,25 @@ export default class ModalExample extends Component {
             <TouchableOpacity
               style={styles.button}
               onPress={() => {
-              this.setModalVisible(!this.state.modalVisible);}}>
+                this.setState({showModal: !this.state.showModal,
+                action: '',
+                description: '' });
+                }}>
                 <Text style={styles.buttonFont}>
                 Close
                 </Text>
             </TouchableOpacity >
           </View>
-        </Content>
+        </View>
    
-                
-
-  
-        </Modal>
-        <TouchableOpacity style={styles.button}
-           onPress={() => {
-            this.setModalVisible(true);
-          }}>
-            <Text style={styles.buttonFont}>
-               Add Item
-             </Text>
-            </TouchableOpacity >
+        : <TouchableOpacity style={styles.button}
+        onPress={() => {
+         this.setState({showModal: !this.state.showModal});
+       }}>
+         <Text style={styles.buttonFont}>
+            Add Item
+          </Text>
+         </TouchableOpacity >}
 
       </View>
     );
@@ -194,9 +226,7 @@ const styles = StyleSheet.create({
   },
 
   containerPop: {
-    marginTop: 50,
-    padding: 20,
-    paddingTop: 220,
+    paddingTop: 0,
     backgroundColor: '#ffffff',
     },
 
@@ -218,14 +248,14 @@ const styles = StyleSheet.create({
   },
   row: {
       flexDirection: 'row',
-      justifyContent: 'center',
+      paddingBottom: 10,  
+      paddingTop: 10,
       alignItems: 'center',
   },
   row2: {
-    paddingBottom: 20,
-    paddingLeft: 10,
+    marginLeft: 10,
+
     flexDirection: 'row',
-    alignItems: 'center',
     color: '#fff',
 },
 
@@ -233,8 +263,4 @@ const styles = StyleSheet.create({
    marginBottom: 30,
 
   },
-  radio: {
-    color: "#fff",
-
-  }
 });

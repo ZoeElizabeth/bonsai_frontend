@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text } from 'react-native';
-import OverviewViewPie from '../pages/OverviewView';
+import OverviewView from '../pages/OverviewView';
 import GraphChart from '../charts/Graph.js';
 
 export default class OverviewScreen extends React.Component {
@@ -11,8 +11,7 @@ export default class OverviewScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <OverviewViewPie/>
-        <GraphChart/>
+      <OverviewView/>
       </ScrollView>
     );
   }

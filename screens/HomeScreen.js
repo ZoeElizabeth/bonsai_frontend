@@ -10,9 +10,10 @@ import {
   Button,
   Fetch, 
   FlatList,
-  ImageBackground
+  ImageBackground,
+
 } from 'react-native';
-import { WebBrowser } from 'expo';
+import { WebBrowser, } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 import AddItem from '../modal/AddItem';
@@ -31,46 +32,62 @@ export default class HomeScreen extends React.Component {
     super(props);
     this.state ={ 
       isLoading: true,
-      dataSource: [],
+      actionSource: [], // List of all actions
       currentAction: '',
-      
+      showModal: false,
     }
-    this.fetching = this.fetching.bind(this);
+    this.fetchActions = this.fetchActions.bind(this);
     this.handlePress = this.handlePress.bind(this);
   }
 
   //Toggles the description based on item/actions.id
   handlePress(id, item){
+    if (id === this.state.currentAction){
+
+      this.setState({
+        currentAction: ''});
+    } else {
+      this.setState({
+        currentAction: id,});
+    }
+  }
+
+  handleclose(){
     this.setState({
-      currentAction: id,
+      currentAction: '',
 
     });
   }
   componentDidMount(){
-    this.fetching()
+    this.fetchActions()  
   }
 
-  //Function used for fetching user actions, can be passed as props.
-    fetching = () => {
-      return fetch('http://localhost:8080/dayli_list/1/actions')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson.reverse(),
-        });
-      })
-      .catch((error) =>{
-        console.error(error);
+  dailyListActions(dayli_list_id, actions) {
+    //grabbing daily list id  from action and comparing to a lists id
+    return actions.filter(action => action.dayli_list_id === dayli_list_id);
+  }
+
+  fetchActions = () => {
+  
+    return fetch('http://localhost:8080/user/1/actions')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({
+        isLoading: false,
+        actionSource: responseJson,
       });
-    }
+    })
+    .catch((error) =>{
+      console.error(error);
+    });
+  }
 
   //Rendering list items to show if they are a red or green action
   itemList = (item) => {
     if (!item.redFlag){
       return ( 
       <View>
-        <View style={styles.contentContainer}>
+        <View style={styles.row}>
           <Icon style={styles.icon}  type="FontAwesome" name="circle"></Icon>
           <Button 
             color="#538B9C"
@@ -83,7 +100,7 @@ export default class HomeScreen extends React.Component {
     </View>)
     }
     return ( <View>
-      <View style={styles.contentContainer}>
+      <View style={styles.row}>
         <Icon style={styles.icon2}  type="FontAwesome" name="circle"></Icon>
         <Button 
           color="#538B9C"
@@ -95,13 +112,12 @@ export default class HomeScreen extends React.Component {
     {this.state.currentAction === item.id ? <Text style={styles.description} id={item.id}>{item.description}</Text> : null}
   
   </View>)
-
-
   }
 
   render() {
-
-
+    // TODO: Don't hard-code first parameter.
+    //       It should be a dynamic daily list ID.
+    const dailyActions = this.dailyListActions(1, this.state.actionSource);
 
     return (
       
@@ -109,25 +125,22 @@ export default class HomeScreen extends React.Component {
         <Text style={styles.tabBarInfoText}>Welcome to Bonsai</Text> 
         <View style={styles.tree_graph}>
           <ImageBackground style={styles.tree_imgs} source={image.tree_30} />
-          <Processgraph/> 
+          <Processgraph actionSource={dailyActions}/> 
         </View>
-     
+
         <View style={styles.center} > 
-          <AddItem fetching={this.fetching}/>  
+          <AddItem fetchActions={this.fetchActions} />  
         </View>
- 
-       
+
         <ScrollView contentContainerStyle={styles.contentContainer}>
 
-      
-        <FlatList
-          extraData={this.state}
-          data={this.state.dataSource}
+        <FlatList 
+          data={dailyActions.reverse()}
           renderItem={({item}) => this.itemList(item) }
           keyExtractor={({id}, index) => id.toString()}/>
-      
         </ScrollView>
-        </View>
+   
+      </View>
       
     );
   }
@@ -166,13 +179,8 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingTop: 13,
-    paddingLeft: 10,
-    textAlign: 'left',
-    alignItems: 'center',
     fontSize: 18,
     color: 'black',
-    flexDirection: 'row',
-
   },
 
   tree_imgs: {
@@ -192,14 +200,16 @@ const styles = StyleSheet.create({
 
   icon:{
     paddingRight: 10,
-    color: 'green',
+    color: '#70B879',
     fontSize: 10,
+    alignItems: 'center',
   },
 
   icon2:{
     paddingRight: 10,
     fontSize: 10,
-    color: 'red',
+    color: '#FFA0A0',
+    alignItems: 'center',
   },
 
   fonty:{
@@ -235,10 +245,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
 
   },
-
   description: {
-    paddingLeft: 45,
+    paddingLeft: 65,
     color: '#2e5a68',
     fontSize: 15,
-  }
+    
+  },
+  row: {
+    paddingLeft: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+    textAlign: 'left',
+    fontSize: 18,
+    color: 'black',
+},
 });
