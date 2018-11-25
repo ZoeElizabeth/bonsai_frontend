@@ -4,7 +4,7 @@ import UserView from '../pages/UserView';
 
 export default class UserScreen extends React.Component {
   static navigationOptions = {
-    title: 'User',
+    title: 'Bonsai',
   };
 
   render() {

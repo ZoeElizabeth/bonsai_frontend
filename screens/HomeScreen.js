@@ -25,7 +25,7 @@ import Splash from '../modal/Splash';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    title: 'Bonsai',
   };
 
   constructor(props){
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   },
 
   tree_graph: {
-    top: 60,
+    top: 20,
      
 
   },
