@@ -123,12 +123,13 @@ export default class HomeScreen extends React.Component {
       
       <View style={styles.container}>
       <Splash/>
-        <Text style={styles.tabBarInfoText}>Welcome to Bonsai</Text> 
+        {/* <Text style={styles.tabBarInfoText}>Welcome to Bonsai</Text>  */}
         <View style={styles.tree_graph}>
           <ImageBackground style={styles.tree_imgs} source={image.tree_30} />
-          <Processgraph actionSource={dailyActions}/> 
+          <View style={styles.graph}>
+          <Processgraph style={styles.graph} actionSource={dailyActions}/> 
         </View>
-
+        </View>
         <View style={styles.center} > 
           <AddItem fetchActions={this.fetchActions} />  
         </View>
@@ -174,7 +175,6 @@ export default class HomeScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
     justifyContent: 'center',
   },
@@ -185,9 +185,10 @@ const styles = StyleSheet.create({
   },
 
   tree_imgs: {
-    top: 45,
+    top: 25,
     flex: 1,
     height: 200,
+    width: '102%',
   },
 
   center: {
@@ -197,6 +198,8 @@ const styles = StyleSheet.create({
 
   tree_graph: {
     top: 60,
+     
+
   },
 
   icon:{
@@ -260,4 +263,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'black',
 },
+graph: {
+  // flex: 2,
+
+}
 });

@@ -60,8 +60,8 @@ ProcessGraph.propTypes = {
 ProcessGraph.defaultProps = {
   result: 0,
   total: 200,
-  padding: 5,
-  size: 260,
+  padding: 1,
+  size: 250,
   stroke: 8,
   color: '#AAD9A5'
 };

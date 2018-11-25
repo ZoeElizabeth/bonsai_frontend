@@ -5,7 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
+  TouchableHighlight,
   View,
   Button,
   Fetch, 
@@ -27,9 +27,25 @@ export default class OverviewView extends React.Component {
 
         return (
             <View>
-                <Text style={styles.title}>Daily Activity Overview</Text>
+               
+          
+               <TouchableHighlight
+                  style={styles.background}
+                >
+
+              <Text style={styles.title}>Daily Activity Overview</Text>
+
+                </TouchableHighlight>
+
+            
+
                 <PieChart/>
+                <TouchableHighlight
+                  style={styles.background}
+                >
+
                 <Text style={styles.title}>All Time Overview</Text>
+                </TouchableHighlight>
                 <GraphChart/>
             </View>
         )
@@ -38,16 +54,23 @@ export default class OverviewView extends React.Component {
 
 const styles = StyleSheet.create({
     title: {
-        textAlign: "center",
-        borderRadius: 100,
-        fontSize: 30,
-        fontWeight: 'bold',
-        padding: 15,
-        backgroundColor: '#AAD9A5',
-        color:'#fff',
-        margin: 15,
+      textAlign: "center",
+      fontSize: 25,
+      fontWeight: 'bold',
+      
+    
+      color:'#fff',
+
         
 
+    },    
+    background: {
+      margin: 15,
+      padding: 5,
+      borderRadius: 100,
+      backgroundColor: '#AAD9A5',
+
     },
+
 
 });

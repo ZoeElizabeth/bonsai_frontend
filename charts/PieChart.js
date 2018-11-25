@@ -109,16 +109,47 @@ export default class OverviewViewPie extends React.Component {
 				]
 				
 
+                const Labels = ({ slices, height, width }) => {
+                    return slices.map((slice, index) => {
+                        const { labelCentroid, pieCentroid, data } = slice;
+                        return (
+               
+                            <Svg.G
+                                key={index}
+                                x={labelCentroid[ 0 ]}
+                                y={labelCentroid[ 1 ]}
+                            >
 
-        return (
-            <PieChart
-                style={{ height: 200 }}
-                valueAccessor={({ item }) => item.amount}
-                data={data}
-                spacing={0}
-                outerRadius={'95%'}
-            >
-            </PieChart>
-        )
-    }
-}
+                   <Text
+                        key={index}
+                        x={pieCentroid[ 0 ]}
+                        y={pieCentroid[ 1 ]}
+                        fill={'white'}
+                        textAnchor={'middle'}
+                        alignmentBaseline={'middle'}
+                        fontSize={24}
+                        stroke={'black'}
+                        strokeWidth={0.2}
+                    >
+                        {data.amount}
+                    </Text>
+                            </Svg.G>
+                           
+                        )
+                    })
+                }
+        
+                return (
+                    <PieChart
+                        style={{ height: 200 }}
+                        valueAccessor={({ item }) => item.amount}
+                        data={data}
+                        spacing={0}
+                        outerRadius={'95%'}
+                    >
+                        <Labels/>
+                    </PieChart>
+                )
+            }
+        
+        }

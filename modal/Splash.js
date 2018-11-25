@@ -6,7 +6,7 @@ import bg from '../emoji/emoji.js';
 
 export default class Splash extends Component {
   state = {
-    modalVisible: true,
+    modalVisible: false,
     username: '',
     password:'',
   };
@@ -43,7 +43,7 @@ export default class Splash extends Component {
                 </Item>
               
                 <Item style={styles.item}>
-                  <Input placeholder="password" 
+                  <Input placeholder="Password" 
                     secureTextEntry={true}
                     onChangeText={(inputVal) => this.setState({password: inputVal})}
                     value={this.state.password}/>
