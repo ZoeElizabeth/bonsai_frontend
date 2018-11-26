@@ -7,6 +7,7 @@ import { Content, Form, Item, Input, Icon} from 'native-base';
 
 
 export default class AchievmentsView extends React.Component {
+
   render() {
     return ( 
       <View>
