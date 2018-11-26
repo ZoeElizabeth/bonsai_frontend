@@ -205,7 +205,7 @@ export default class AddItem extends Component {
           </View>
         </View>
    
-        : <TouchableOpacity style={styles.button}
+        : <TouchableOpacity style={styles.additem}
         onPress={() => {
          this.setState({showModal: !this.state.showModal});
        }}>
@@ -223,11 +223,13 @@ const styles = StyleSheet.create({
 
   container: {
     backgroundColor: '#fff',
+    margin: 0
   },
 
   containerPop: {
     paddingTop: 0,
     backgroundColor: '#ffffff',
+    margin: 0
     },
 
   buttonFont: {
@@ -240,6 +242,16 @@ const styles = StyleSheet.create({
     padding: 6,
     margin: 20,
     marginTop: 10,
+    width: 130,
+    textAlign: 'center',
+    alignItems: 'center',
+    backgroundColor: '#AAD9A5',
+    borderRadius: 10,
+  },
+  additem: {
+    padding: 6,
+    // margin: 20,
+    marginLeft: 20,
     width: 130,
     textAlign: 'center',
     alignItems: 'center',

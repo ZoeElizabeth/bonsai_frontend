@@ -3,10 +3,17 @@ import { ScrollView, StyleSheet } from 'react-native';
 import UserView from '../pages/UserView';
 
 export default class UserScreen extends React.Component {
-  static navigationOptions = {
+  static navigationOptions = () => ({
     title: 'Bonsai',
-  };
-
+    headerStyle: {
+      backgroundColor: '#AAD9A5',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      fontSize: 25,
+    },
+  });
   render() {
     return (
       <ScrollView style={styles.container}>

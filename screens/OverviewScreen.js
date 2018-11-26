@@ -4,9 +4,17 @@ import OverviewView from '../pages/OverviewView';
 import GraphChart from '../charts/Graph.js';
 
 export default class OverviewScreen extends React.Component {
-  static navigationOptions = {
+  static navigationOptions = () => ({
     title: 'Bonsai',
-  };
+    headerStyle: {
+      backgroundColor: '#AAD9A5',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      fontSize: 25,
+    },
+  });
 
   render() {
     return (
