@@ -21,7 +21,7 @@ import image from '../tree_img/export.js';
 import Processgraph from '../charts/progress_circle';
 import { Icon} from 'native-base';
 import Splash from '../modal/Splash';
-
+import GrowingTree from '../charts/Tree.js';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -125,7 +125,7 @@ export default class HomeScreen extends React.Component {
       <Splash/>
         {/* <Text style={styles.tabBarInfoText}>Welcome to Bonsai</Text>  */}
         <View style={styles.tree_graph}>
-          <ImageBackground style={styles.tree_imgs} source={image.tree_30} />
+          <GrowingTree />
           <View style={styles.graph}>
           <Processgraph style={styles.graph} actionSource={dailyActions}/> 
         </View>
