@@ -74,14 +74,6 @@ class GrowingTree extends React.Component {
       } else {
         return <ImageBackground style={styles.tree_imgs} source={image.tree_30}/>
       } 
-        // switch(this.state.greenPoints){
-        //   case greenPoints  <= 10:
-        //     <ImageBackground style={styles.tree_imgs} source={image.tree_1} />
-        //     break;
-        //   case greenPoints  <= 20:
-        //     <ImageBackground style={styles.tree_imgs} source={image.tree_2} />
-        //     break;
-        // }
     }
     
     render() {
