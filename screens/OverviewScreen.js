@@ -5,7 +5,7 @@ import GraphChart from '../charts/Graph.js';
 
 export default class OverviewScreen extends React.Component {
   static navigationOptions = {
-    title: 'Overview',
+    title: 'Bonsai',
   };
 
   render() {

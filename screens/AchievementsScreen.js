@@ -4,7 +4,7 @@ import AchievementsView from '../pages/AchievementsView';
 
 export default class AchievmentsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Achievements',
+    title: 'Bonsai',
   };
 
   render() {

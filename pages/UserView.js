@@ -4,7 +4,45 @@ import { Constants } from 'expo';
 import image from '../tree_img/export.js';
 
 export default class UserView extends React.Component {
+
+
+  constructor(props) {
+    super(props);
+    this.state = {
+        actionSource: [],
+    }
+
+  }
+
+  componentDidMount(){
+    this.fetchActions()
+
+  }
+  fetchActions = () => {
+  
+    return fetch('http://localhost:8080/user/1/actions')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({
+        isLoading: false,
+        actionSource: responseJson,
+      });
+    })
+    .catch((error) =>{
+      console.error(error);
+    });
+  }
+
+  dailyListActions(dayli_list_id, actions) {
+    //grabbing daily list id  from action and comparing to a lists id
+    return actions.filter(action => action.dayli_list_id === dayli_list_id);
+  }
+  
+  greenPoints = () => this.state.actionSource.filter(action => !action.redFlag).length;
+  redPoints = () => this.state.actionSource.filter(action => action.redFlag).length;
+
   render() {
+    
 
     return (
      
@@ -12,15 +50,15 @@ export default class UserView extends React.Component {
 
 
     <View style={styles.container}>
-      <Text style={styles.font} >
-        Bonsai
-      </Text>
-      <View/>
 
       <View style={{flex: 1, flexDirection: 'row'}}>
+      <View style={styles.secondBorder}>
         <Image style={styles.kanye} source={image.kanye} />
-        <Text style={styles.points} > Health Points </Text>
+        </View>
+        <Text style={styles.points} > {this.greenPoints()} {"\n"} Healthy Points </Text>
+      
       </View>
+
 
       <View style={styles.layout}>
         <Text style={styles.kanyText}> Lil Kanye </Text>
@@ -51,21 +89,22 @@ const styles = StyleSheet.create({
   kanye: {
     // flex: 1,
     // flexDirection: 'row',
-    height: 200,
-    width: 200,
-    borderRadius: 200/2,
+    height: 150,
+    width: 150,
+    borderRadius: 150/2,
     borderWidth: 10,
-    borderColor: 'green',
+    borderColor: '#AAD9A5',
   },
   layout: {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'stretch',
     paddingLeft: 70,
-    paddingTop: 250,
+    paddingTop: 200,
   },
   kanyText: {
     fontSize: 35,
+    color: '#538B9C',
     // borderBottomColor: 'black',
     // borderBottomWidth: 1,
   },
@@ -76,14 +115,26 @@ const styles = StyleSheet.create({
     // borderColor: '#70B879',
   },
   points: {
+    fontWeight: '500',
     paddingTop: 40,
     fontSize: 20,
     paddingLeft: 40,
+    color: '#538B9C',
   },
   line: {
     width: 300,
     paddingLeft: 70,
-    borderTopColor: '#ccffff',
-    borderTopWidth: 1,
+    borderTopColor: '#000',
+    borderTopWidth: StyleSheet.hairlineWidth,
+  },
+  secondBorder: {
+    borderColor: "#70B879",
+    borderWidth: 5,
+    justifyContent: "center",
+    alignItems: "center",
+    width: 175,
+    height: 175,
+    borderRadius: 175/2,
+    backgroundColor: '#70B879',
   }
 });
