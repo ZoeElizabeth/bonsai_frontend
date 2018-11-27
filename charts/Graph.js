@@ -105,12 +105,15 @@ export default class GraphChart extends React.Component {
               render() {
       const redActions = this.state.allRedActions
       const greenActions = this.state.allGreenActions
+      const data = [ 50, 10, 40, 95, 4, 24, 85, 91, 35, 53, 53, 24, 50, 20, 80 ]
+      const data2 = [ 50, 10, 40, 95, 4, 24, 35, 53, 53, 24, 50, 85, 91, 20, 80 ].reverse()
+      const dates = [1, 2, 3, 4, 5, 6 ,7, 8, 9,] ;
 
 
                 return (
                   <View style={{ height: 200, padding: 20, flexDirection: 'row' }}>
                     <YAxis
-                    data={greenActions}
+                    data={data}
                     contentInset={{ top: 10, bottom: 10 }}
                     spacing={0.2}
                     // formatLabel={(_, index) => data[ index ].label}
@@ -118,22 +121,24 @@ export default class GraphChart extends React.Component {
                   <View style={{ flex: 1, marginLeft: 10 }}>
                         <AreaChart
                             style={ { flex: 1 } }
-                            data={ greenActions }
+                            data={ data }
                             svg={{ stroke: '#70B879' }}
-                            contentInset={ { top: 20, bottom: 20 } }
+                            // contentInset={ { top: 20, bottom: 20 } }
                            
                         >
                             <Grid/>
                         </AreaChart>
                         <AreaChart
                             style={ StyleSheet.absoluteFill }
-                            data={ redActions }
+                            data={ data2 }
                             svg={{ stroke: '#FFA0A0' }}
-                            contentInset={ { top: 20, bottom: 20 } }
+                            // contentInset={ { top: 20, bottom: 20 } 
+                       
                            
                         />
+                                            
                                               <XAxis
-                            data={ greenActions }
+                            data={ dates }
                             svg={{
                                 fill: 'black',
                                 fontSize: 8,
@@ -141,8 +146,9 @@ export default class GraphChart extends React.Component {
                                 rotation: 20,
                                 originY: 30,
                                 y: 5,
+                                
                             }}
-                       
+                            contentInset={{ top: 10, bottom: 10 }}
                             numberOfTicks={ 7 }
                             style={{ marginHorizontal: -15, height: 20 }}
                             contentInset={{ left: 10, right: 25 }}
