@@ -27,7 +27,7 @@ const images = {
   tree_26: require('./26.jpg'),
   tree_27: require('./27.jpg'),
   tree_28: require('./28.jpg'),
-  tree_39: require('./39.jpg'),
+  tree_39: require('./29.jpg'),
   tree_30: require('./30.jpg'),
   stickers: require('./all_stickers.png'),
   ///you can add more many images like this here.
