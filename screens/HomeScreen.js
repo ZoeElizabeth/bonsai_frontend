@@ -14,6 +14,7 @@ import {
 
 } from 'react-native';
 import { WebBrowser, } from 'expo';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import { MonoText } from '../components/StyledText';
 import AddItem from '../modal/AddItem';
@@ -35,6 +36,7 @@ export default class HomeScreen extends React.Component {
       fontSize: 25,
     },
   });
+
 
 
   constructor(props){
@@ -95,7 +97,7 @@ export default class HomeScreen extends React.Component {
   itemList = (item) => {
     if (!item.redFlag){
       return ( 
-      <View>
+      <View stlye={{backgroundColor: '#fff'}}>
         <View style={styles.row}>
           <Icon style={styles.icon}  type="FontAwesome" name="circle"></Icon>
           <Button 
@@ -139,17 +141,20 @@ export default class HomeScreen extends React.Component {
           <Processgraph style={styles.graph} actionSource={dailyActions}/> 
         </View>
         </View>
+       
         <View style={styles.center} > 
           <AddItem fetchActions={this.fetchActions} />  
         </View>
-
         <ScrollView contentContainerStyle={styles.contentContainer}>
+
 
         <FlatList 
           data={dailyActions.reverse()}
           renderItem={({item}) => this.itemList(item) }
           keyExtractor={({id}, index) => id.toString()}/>
         </ScrollView>
+
+        
    
       </View>
       
@@ -186,6 +191,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     justifyContent: 'center',
+    height: '100%'
   },
   contentContainer: {
     paddingTop: 13,

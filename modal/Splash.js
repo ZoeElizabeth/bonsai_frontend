@@ -7,7 +7,7 @@ import { Font, AppLoading } from 'expo';
 
 export default class Splash extends Component {
   state = {
-    modalVisible: false,
+    modalVisible: true,
     username: '',
     password:'',
     fontLoaded: false,
@@ -42,7 +42,7 @@ export default class Splash extends Component {
           <ImageBackground style={{width: '100%', height: '100%'}} source={bg.bg}>
             <View style={styles.title}>
           
-              <Text style={styles.text}>Welcome to Bonsai</Text>
+              <Text style={styles.text}>Welcome to{"\n"} Bonsai</Text>
             </View>
               
             <View style={styles.form}>
@@ -103,6 +103,10 @@ const styles = StyleSheet.create({
   },
 text: {
   // fontFamily: 'GiveYouGlory',
+  color: '#538B9C',
+  fontSize: 45,
+  fontWeight: 'bold',
+  textAlign: 'center',
 },
   title: {
     // flex: 1,
