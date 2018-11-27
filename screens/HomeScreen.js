@@ -125,7 +125,7 @@ export default class HomeScreen extends React.Component {
       <Splash/>
         {/* <Text style={styles.tabBarInfoText}>Welcome to Bonsai</Text>  */}
         <View style={styles.tree_graph}>
-          <GrowingTree />
+          <GrowingTree fetchActions={this.fetchActions}/>
           <View style={styles.graph}>
           <Processgraph style={styles.graph} actionSource={dailyActions}/> 
         </View>
