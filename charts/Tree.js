@@ -7,7 +7,7 @@ class GrowingTree extends React.Component {
   constructor(props){
     super(props);
     this.state ={ 
-      greenPoints: 280,
+      greenPoints: [],
     }
     this.greenPoints = () => this.props.actionSource.filter(action => !action.redFlag).length;
   }
@@ -71,8 +71,10 @@ class GrowingTree extends React.Component {
         return <ImageBackground style={styles.tree_imgs} source={image.tree_28}/>
       } if(this.state.greenPoints > 280 && this.state.greenPoints <= 290){
         return <ImageBackground style={styles.tree_imgs} source={image.tree_29}/>
-      } else {
+      } if(this.state.greenPoints > 290 && this.state.greenPoints <= 300){
         return <ImageBackground style={styles.tree_imgs} source={image.tree_30}/>
+      } else {
+        return <ImageBackground style={styles.tree_imgs} source={image.stickers}/>
       } 
     }
     
