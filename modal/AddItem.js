@@ -61,7 +61,7 @@ export default class AddItem extends Component {
     const color_category = this.state.color_category;
 
 
-    return fetch('http://localhost:8080/dayli_list/1/actions', {
+    return fetch('http://192.168.88.103:8080/dayli_list/1/actions', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -72,7 +72,6 @@ export default class AddItem extends Component {
       description: description,
       redFlag: redFlag,
       color_category: color_category,
-
     }),
 
   })
@@ -91,6 +90,7 @@ export default class AddItem extends Component {
     description: '',
     colorBG: '#fff',
     colorBG2: '#fff',
+    selectedButton: 0,
    });
 }
 
@@ -113,7 +113,7 @@ export default class AddItem extends Component {
           <Form>
             <Item>
               <Input placeholder="Action" 
-                multiline={true}
+               
                 onChangeText={(inputVal) => this.setState({action: inputVal})}
                 value={this.state.action}/>
             </Item>
@@ -254,6 +254,7 @@ const styles = StyleSheet.create({
   additem: {
     padding: 6,
     margin: 20,
+    marginTop: 0, 
     // marginLeft: 20,
     width: 130,
     textAlign: 'center',

@@ -68,29 +68,11 @@ export default class HomeScreen extends React.Component {
 
     });
   }
-  // componentDidMount(){
-  //   this.fetchActions()  
-  // }
 
   dailyListActions(dayli_list_id, actions) {
     //grabbing daily list id  from action and comparing to a lists id
     return   this.props.screenProps.fetchActions.filter(action => action.dayli_list_id === dayli_list_id);
   }
-
-  // fetchActions = () => {
-  
-  //   return fetch('http://localhost:8080/user/1/actions')
-  //   .then((response) => response.json())
-  //   .then((responseJson) => {
-  //     this.setState({
-  //       isLoading: false,
-  //       actionSource: responseJson,
-  //     });
-  //   })
-  //   .catch((error) =>{
-  //     console.error(error);
-  //   });
-  // }
 
   //Rendering list items to show if they are a red or green action
   itemList = (item) => {
@@ -158,11 +140,12 @@ export default class HomeScreen extends React.Component {
           <Processgraph style={styles.graph} actionSource={dailyActions}/> 
         </View>
         </View>
+        <ScrollView contentContainerStyle={styles.contentContainer}>
        
         <View style={styles.center} > 
           <AddItem  refreshActions={this.props.screenProps.refreshActions} fetchActions={this.props.screenProps.fetchActions}  />  
         </View>
-        <ScrollView contentContainerStyle={styles.contentContainer}>
+    
 
 
         <FlatList 
@@ -222,17 +205,17 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 200,
     width: '102%',
+    marginBottom: 20,
   },
 
   center: {
-    paddingTop: 30,
-
     alignItems: 'center',
 
   },
 
   tree_graph: {
     top: 20,
+    backgroundColor: '#fff'
      
 
   },
@@ -298,7 +281,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
 },
 graph: {
-  // flex: 2,
+  marginBottom: 30,
 
 }
 });

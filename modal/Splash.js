@@ -22,7 +22,6 @@ export default class Splash extends Component {
 
       'GiveYouGlory': require('../assets/fonts/GiveYouGlory.ttf'),
     });   this.setState({ fontLoaded: true });
-    console.log('wtf')
   }
   
   

@@ -13,10 +13,6 @@ export default class Description extends React.Component {
     }
   }
   
-  // user = (user) => {
-  //   console.log(user.name)
-  // }
-
  
   render() {
 
