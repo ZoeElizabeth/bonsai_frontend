@@ -70,7 +70,7 @@ export default class OverviewViewPie extends React.Component {
 					orange_cat.push(actions)
 				} if (actions.color_category === '#9A60F7') {
 					purple_cat.push(actions)
-				} if (actions.color_category === 'FCDF15') {
+				} if (actions.color_category === '#FCDF15') {
 					yellow_cat.push(actions)
 				}
 			});
