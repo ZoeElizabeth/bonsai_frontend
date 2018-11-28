@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet , Text} from 'react-native';
 import UserView from '../pages/UserView';
 
 export default class UserScreen extends React.Component {
@@ -15,8 +15,10 @@ export default class UserScreen extends React.Component {
     },
   });
   render() {
+
     return (
       <ScrollView style={styles.container}>
+      <Text>{this.props.screenProps.message}</Text>
         <UserView />
       </ScrollView>
     );

@@ -64,13 +64,13 @@ export default class OverviewViewPie extends React.Component {
 
 			dailyActions.forEach(function(actions) {
 		
-				if (actions.color_category === 'blue') {
+				if (actions.color_category === '#4FBCFC') {
 					blue_cat.push(actions)
-				} if (actions.color_category === 'orange') {
+				} if (actions.color_category === '#FCB54D') {
 					orange_cat.push(actions)
-				} if (actions.color_category === 'purple') {
+				} if (actions.color_category === '#9A60F7') {
 					purple_cat.push(actions)
-				} if (actions.color_category === 'yellow') {
+				} if (actions.color_category === 'FCDF15') {
 					yellow_cat.push(actions)
 				}
 			});

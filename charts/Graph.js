@@ -86,15 +86,14 @@ export default class GraphChart extends React.Component {
               let greenLengths = []
               
               
-                console.log("start",red, "red")
+              
                 green.forEach(function(y, two) {
                   greenLengths.push(y.length)
                 })
                 red.forEach(function(x) {
                   redLengths.push(x.length)
                 })
-                  console.log(redLengths, "go")
-                  console.log(greenLengths, "go")
+                
 
                   this.setState({
                     allGreenActions: greenLengths,

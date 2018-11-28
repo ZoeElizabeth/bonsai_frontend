@@ -29,23 +29,23 @@ export default class AddItem extends Component {
           {
             label: '1',
             color: '#4FBCFC',
-            action:'blue'
+            action:'#4FBCFC'
           }, 
           {
             label: '2',
             color: '#9A60F7',
-            action: 'purple'        
+            action: '#9A60F7'        
           },
           {
             label: '3',
             color: '#FCDF15',
-            action: 'yellow'
+            action: '#FCDF15'
           }, 
           {
             label: '4',
             color: '#FCB54D',
             labelColor: '#ffffff',
-            action:'orange'       
+            action:'#FCB54D'       
           }
       ],
     }

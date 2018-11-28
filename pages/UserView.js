@@ -11,7 +11,7 @@ export default class UserView extends React.Component {
     this.state = {
         actionSource: [],
     }
-
+    // this.props.fetchActions
   }
 
   componentDidMount(){
@@ -42,7 +42,7 @@ export default class UserView extends React.Component {
   redPoints = () => this.state.actionSource.filter(action => action.redFlag).length;
 
   render() {
-    
+    // console.log(this.props.fetchActions())
 
     return (
      

@@ -9,7 +9,29 @@ export default class App extends React.Component {
   // };
   constructor(props){
     super(props);
-    this.state ={ isLoadingComplete: false}
+    this.state ={ 
+      isLoadingComplete: false,
+      actionSource: [],}
+  }
+
+  componentDidMount() {
+
+    this.fetchActions()
+  }
+
+  fetchActions = () => {
+  
+    return fetch('http://localhost:8080/user/1/actions')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({
+        isLoading: false,
+        actionSource: responseJson,
+      });
+    })
+    .catch((error) =>{
+      console.error(error);
+    });
   }
 
 
@@ -28,7 +50,9 @@ export default class App extends React.Component {
 
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
 
-          <AppNavigator />
+          <AppNavigator
+          screenProps ={{ fetchActions: this.fetchActions}}
+          />
 
         </View>
       );

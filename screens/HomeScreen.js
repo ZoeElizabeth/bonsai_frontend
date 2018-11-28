@@ -54,7 +54,6 @@ export default class HomeScreen extends React.Component {
   //Toggles the description based on item/actions.id
   handlePress(id, item){
     if (id === this.state.currentAction){
-
       this.setState({
         currentAction: ''});
     } else {
@@ -107,7 +106,16 @@ export default class HomeScreen extends React.Component {
           </Button>
         </View>
 
-      {this.state.currentAction === item.id ? <Text style={styles.description}  id={item.id}>{item.description}</Text> : null}
+    {this.state.currentAction === item.id ? <View style={{paddingLeft: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+    textAlign: 'left',
+    fontSize: 18}}><Icon style={{paddingLeft: 15,
+      paddingRight: 15,
+    color: item.color_category,
+    fontSize: 25,
+    alignItems: 'center'}}  type="FontAwesome" name="caret-right"></Icon><Text style={styles.description}  id={item.id}>{item.description}</Text></View> : null}
+  
     </View>)
     }
     return ( <View>
@@ -120,7 +128,15 @@ export default class HomeScreen extends React.Component {
         </Button>
       </View>
 
-    {this.state.currentAction === item.id ? <Text style={styles.description} id={item.id}>{item.description}</Text> : null}
+    {this.state.currentAction === item.id ? <View style={{paddingLeft: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+    textAlign: 'left',
+    fontSize: 18}}><Icon style={{paddingLeft: 15,
+      paddingRight: 15,
+    color: item.color_category,
+    fontSize: 25,
+    alignItems: 'center'}}  type="FontAwesome" name="caret-right"></Icon><Text style={styles.description}  id={item.id}>{item.description}</Text></View> : null}
   
   </View>)
   }
@@ -129,6 +145,7 @@ export default class HomeScreen extends React.Component {
     // TODO: Don't hard-code first parameter.
     //       It should be a dynamic daily list ID.
     const dailyActions = this.dailyListActions(1, this.state.actionSource);
+  
 
     return (
       
@@ -197,6 +214,7 @@ const styles = StyleSheet.create({
     paddingTop: 13,
     fontSize: 18,
     color: 'black',
+    width: '100%',
   },
 
   tree_imgs: {
@@ -267,7 +285,7 @@ const styles = StyleSheet.create({
 
   },
   description: {
-    paddingLeft: 65,
+    marginRight: 40 ,
     color: '#2e5a68',
     fontSize: 15,
     
@@ -278,7 +296,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     textAlign: 'left',
     fontSize: 18,
-    color: 'black',
 },
 graph: {
   // flex: 2,
