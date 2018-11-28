@@ -15,41 +15,18 @@ export default class GraphChart extends React.Component {
           allGreenActions: [],
           allRedActions: [],
         }
-        this.fetchActions = this.fetchActions.bind(this);
-        this.sortData =this.sortData.bind(this)
+        this.greenPoints = () => this.props.fetchActions.filter(action => !action.redFlag).length;
+        this.redPoints = () => this.props.fetchActions.filter(action => action.redFlag).length;
+      
       }
     
-        fetchActions = () => {
-      
-            return fetch('http://localhost:8080/user/1/actions')
-            .then((response) => response.json())
-            .then((responseJson) => {
-              this.setState({
-                isLoading: false,
-                actionSource: responseJson,
-                        });
-    
-            })
-            .catch((error) =>{
-              console.error(error);
-                    });
-                }
-                
-                componentDidMount() {
-                    this.fetchActions().then(() => {
-                      this.getData()
-                });
-
-                }
-    
-
 
                 getData = () => {    
       
                   let listRed = [];
                   let listGreen = [];
             
-                this.state.actionSource.forEach(function(action, index) {
+                this.props.fetchActions.forEach(function(action, index) {
           
                   if (action.redFlag === false) {
                     if (listGreen.hasOwnProperty(action.dayli_list_id)) {
@@ -106,7 +83,9 @@ export default class GraphChart extends React.Component {
       const greenActions = this.state.allGreenActions
       const data = [ 50, 10, 40, 95, 4, 24, 85, 91, 35, 53, 53, 24, 50, 20, 80 ]
       const data2 = [ 50, 10, 40, 95, 4, 24, 35, 53, 53, 24, 50, 85, 91, 20, 80 ].reverse()
+
       const dates = [1, 2, 3, 4, 5, 6 ,7, 8, 9,] ;
+
 
 
                 return (

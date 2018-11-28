@@ -39,14 +39,14 @@ export default class OverviewView extends React.Component {
 
             
 
-                <PieChart/>
+                <PieChart fetchActions={this.props.fetchActions}/>
                 <TouchableHighlight
                   style={styles.background}
                 >
 
                 <Text style={styles.title}>All Time Overview</Text>
                 </TouchableHighlight>
-                <GraphChart/>
+                <GraphChart fetchActions={this.props.fetchActions}/>
             </View>
         )
     }

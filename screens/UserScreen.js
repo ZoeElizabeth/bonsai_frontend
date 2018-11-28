@@ -17,9 +17,8 @@ export default class UserScreen extends React.Component {
   render() {
 
     return (
-      <ScrollView style={styles.container}>
-      <Text>{this.props.screenProps.message}</Text>
-        <UserView />
+      <ScrollView style={styles.container} >
+        <UserView fetchActions={this.props.screenProps.fetchActions} />
       </ScrollView>
     );
   }

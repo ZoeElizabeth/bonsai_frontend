@@ -83,12 +83,15 @@ export default class AddItem extends Component {
     this.handleSubmit()
     .then(() => {
 
-    this.props.fetchActions();
+    this.props.refreshActions(1, this.props.fetchActions);
 
     });
     this.setState({ showModal: false,
     action: '',
-    description: '' });
+    description: '',
+    colorBG: '#fff',
+    colorBG2: '#fff',
+   });
 }
 
 
@@ -250,8 +253,8 @@ const styles = StyleSheet.create({
   },
   additem: {
     padding: 6,
-    // margin: 20,
-    marginLeft: 20,
+    margin: 20,
+    // marginLeft: 20,
     width: 130,
     textAlign: 'center',
     alignItems: 'center',

@@ -12,29 +12,10 @@ export default class OverviewViewPie extends React.Component {
       isLoading: true,
       actionSource: [], // List of all actions
     }
-    this.fetchActions = this.fetchActions.bind(this);
-  }
-
-    fetchActions = () => {
+    this.greenPoints = () => this.props.fetchActions.filter(action => !action.redFlag).length;
+    this.redPoints = () => this.props.fetchActions.filter(action => action.redFlag).length;
   
-        return fetch('http://localhost:8080/user/1/actions')
-        .then((response) => response.json())
-        .then((responseJson) => {
-          this.setState({
-            isLoading: false,
-            actionSource: responseJson,
-					});
-
-        })
-        .catch((error) =>{
-          console.error(error);
-				});
-			}
-			
-			componentDidMount() {
-				this.fetchActions()   	
-			}
-
+  }
 
       dailyListActions(dayli_list_id, actions) {
         //grabbing daily list id  from action and comparing to a lists id
@@ -44,7 +25,7 @@ export default class OverviewViewPie extends React.Component {
 			
     render() {
 
-			const dailyActions = this.dailyListActions(1, this.state.actionSource)
+			const dailyActions = this.dailyListActions(1, this.props.fetchActions)
 				let orange_cat = [];
 				let blue_cat = [];
 				let purple_cat = [];

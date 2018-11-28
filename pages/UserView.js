@@ -9,40 +9,15 @@ export default class UserView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        actionSource: [],
+
     }
-    // this.props.fetchActions
-  }
-
-  componentDidMount(){
-    this.fetchActions()
-
-  }
-  fetchActions = () => {
+    this.greenPoints = () => this.props.fetchActions.filter(action => !action.redFlag).length;
+    this.redPoints = () => this.props.fetchActions.filter(action => action.redFlag).length;
   
-    return fetch('http://localhost:8080/user/1/actions')
-    .then((response) => response.json())
-    .then((responseJson) => {
-      this.setState({
-        isLoading: false,
-        actionSource: responseJson,
-      });
-    })
-    .catch((error) =>{
-      console.error(error);
-    });
   }
-
-  dailyListActions(dayli_list_id, actions) {
-    //grabbing daily list id  from action and comparing to a lists id
-    return actions.filter(action => action.dayli_list_id === dayli_list_id);
-  }
-  
-  greenPoints = () => this.state.actionSource.filter(action => !action.redFlag).length;
-  redPoints = () => this.state.actionSource.filter(action => action.redFlag).length;
 
   render() {
-    // console.log(this.props.fetchActions())
+ 
 
     return (
      

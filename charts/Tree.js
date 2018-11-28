@@ -7,10 +7,10 @@ class GrowingTree extends React.Component {
   constructor(props){
     super(props);
     this.state ={ 
-      actionSource: [],
+
     }
-    this.greenPoints = () => this.props.actionSource.filter(action => !action.redFlag).length;
-    this.redPoints = () => this.props.actionSource.filter(action => action.redFlag).length;
+    this.greenPoints = () => this.props.fetchActions.filter(action => !action.redFlag).length;
+    this.redPoints = () => this.props.fetchActions.filter(action => action.redFlag).length;
   }
 
     caseSwitch = () => {
@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
     top: 25,
     flex: 1,
     height: 200,
+    paddingRight: 35,
     width: '102%',
   },
 });

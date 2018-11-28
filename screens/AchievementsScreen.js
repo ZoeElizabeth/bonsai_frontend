@@ -17,7 +17,7 @@ export default class AchievmentsScreen extends React.Component {
   render() {
     return( <ScrollView style={styles.container}>
     
-    <AchievementsView/>
+    <AchievementsView fetchActions={this.props.screenProps.fetchActions} />
   </ScrollView>
 );
 }

@@ -39,6 +39,7 @@ export default class HomeScreen extends React.Component {
 
 
 
+
   constructor(props){
     super(props);
     this.state ={ 
@@ -47,7 +48,6 @@ export default class HomeScreen extends React.Component {
       currentAction: '',
       showModal: false,
     }
-    this.fetchActions = this.fetchActions.bind(this);
     this.handlePress = this.handlePress.bind(this);
   }
 
@@ -68,29 +68,29 @@ export default class HomeScreen extends React.Component {
 
     });
   }
-  componentDidMount(){
-    this.fetchActions()  
-  }
+  // componentDidMount(){
+  //   this.fetchActions()  
+  // }
 
   dailyListActions(dayli_list_id, actions) {
     //grabbing daily list id  from action and comparing to a lists id
-    return actions.filter(action => action.dayli_list_id === dayli_list_id);
+    return   this.props.screenProps.fetchActions.filter(action => action.dayli_list_id === dayli_list_id);
   }
 
-  fetchActions = () => {
+  // fetchActions = () => {
   
-    return fetch('http://localhost:8080/user/1/actions')
-    .then((response) => response.json())
-    .then((responseJson) => {
-      this.setState({
-        isLoading: false,
-        actionSource: responseJson,
-      });
-    })
-    .catch((error) =>{
-      console.error(error);
-    });
-  }
+  //   return fetch('http://localhost:8080/user/1/actions')
+  //   .then((response) => response.json())
+  //   .then((responseJson) => {
+  //     this.setState({
+  //       isLoading: false,
+  //       actionSource: responseJson,
+  //     });
+  //   })
+  //   .catch((error) =>{
+  //     console.error(error);
+  //   });
+  // }
 
   //Rendering list items to show if they are a red or green action
   itemList = (item) => {
@@ -144,7 +144,7 @@ export default class HomeScreen extends React.Component {
   render() {
     // TODO: Don't hard-code first parameter.
     //       It should be a dynamic daily list ID.
-    const dailyActions = this.dailyListActions(1, this.state.actionSource);
+    const dailyActions = this.dailyListActions(1, this.props.screenProps.fetchActions);
   
 
     return (
@@ -153,14 +153,14 @@ export default class HomeScreen extends React.Component {
       <Splash/>
         {/* <Text style={styles.tabBarInfoText}>Welcome to Bonsai</Text>  */}
         <View style={styles.tree_graph}>
-          <GrowingTree fetchActions={this.fetchActions}/>
+          <GrowingTree   fetchActions={this.props.screenProps.fetchActions} />
           <View style={styles.graph}>
           <Processgraph style={styles.graph} actionSource={dailyActions}/> 
         </View>
         </View>
        
         <View style={styles.center} > 
-          <AddItem fetchActions={this.fetchActions} />  
+          <AddItem  refreshActions={this.props.screenProps.refreshActions} fetchActions={this.props.screenProps.fetchActions}  />  
         </View>
         <ScrollView contentContainerStyle={styles.contentContainer}>
 

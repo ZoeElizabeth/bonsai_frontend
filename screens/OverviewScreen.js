@@ -17,12 +17,10 @@ export default class OverviewScreen extends React.Component {
   });
 
   render() {
-    const { navigation } = this.props;
-    const otherParam = navigation.getParam('fetchActions', 'some default value');
-    console.log(otherParam)
+
     return (
       <ScrollView style={styles.container}>
-      <OverviewView/>
+      <OverviewView fetchActions={this.props.screenProps.fetchActions}/>
       </ScrollView>
     );
   }

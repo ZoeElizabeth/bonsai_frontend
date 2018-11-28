@@ -1,5 +1,5 @@
 import React from 'react';
-import { SectionList, Image, StyleSheet, Text, View, TouchableHighlight} from 'react-native';
+import { SectionList, Image, StyleSheet, Text, View, TouchableHighlight, TouchableOpacity} from 'react-native';
 import { Constants } from 'expo';
 import Achieved from '../modal/Achieved';
 import stickers from '../stickers/sticker.js';
@@ -8,10 +8,21 @@ import { Content, Form, Item, Input, Icon} from 'native-base';
 
 export default class AchievmentsView extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+        colorBG: '#fff',
+    }
+
+  }
+
+
   render() {
+
+    // const colorBG = this.state.colorBG
     return ( 
       <View>
-        <Achieved />
+        <Achieved fetchActions={this.props.fetchActions}/>
         <TouchableHighlight
           style={styles.background}>
           <Text style={styles.title}>Achievements</Text>
@@ -38,9 +49,7 @@ export default class AchievmentsView extends React.Component {
             style={styles.images} 
                   source={stickers.medal} />
                           </Item>
-     
               </View> 
-
 
                  <View style={styles.row}>
                  <Item style={styles.item} >
@@ -66,6 +75,7 @@ export default class AchievmentsView extends React.Component {
           <Image
                      style={styles.images} 
                 source={stickers.raccoon} />
+               
                                    </Item>
             <Item style={styles.item} >
           <Image
@@ -123,9 +133,19 @@ images: {
 },
 item: {
   padding: 10,
+  paddingRight: 15,
   borderBottomColor: '#fff',
   overflow: 'visible'
 
-}
+},
+backgrounds: {
+  margin: 5,
+  marginLeft: 35,
+  marginBottom:0,
+  padding: 5, 
+  borderRadius: 50,
+
+},
+
 
 });

@@ -51,7 +51,10 @@ export default class App extends React.Component {
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
 
           <AppNavigator
-          screenProps ={{ fetchActions: this.fetchActions}}
+          screenProps ={{ 
+            message: "hello",
+            fetchActions: this.state.actionSource,
+            refreshActions: this.fetchActions}}
           />
 
         </View>
