@@ -7,7 +7,7 @@ import { Font, AppLoading } from 'expo';
 
 export default class Splash extends Component {
   state = {
-    modalVisible: false,
+    modalVisible: true,
     username: '',
     password:'',
     fontLoaded: false,

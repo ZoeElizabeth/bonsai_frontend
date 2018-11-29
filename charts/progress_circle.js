@@ -59,7 +59,7 @@ ProcessGraph.propTypes = {
 
 ProcessGraph.defaultProps = {
   result: 0,
-  total: 300,
+  total: 30,
   padding: 1,
   size: 250,
   stroke: 8,
