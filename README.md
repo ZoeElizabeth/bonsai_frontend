@@ -9,15 +9,15 @@ Data maps, achievments, badges, and user authentication are still in development
 
 ## WireFrame
 !["Wireframe"]
-(https://i.gyazo.com/d97edc7dec543781c33aaacf8de21693.gif)
+(https://github.com/ZoeElizabeth/bonsai_frontend/blob/master/wireframe/WireFrame.png?raw=true)
 ## Logging In
 !["Logging In"](https://i.gyazo.com/d97edc7dec543781c33aaacf8de21693.gif)
 ## List Overview
 !["Overview"]
 (https://i.gyazo.com/d20016ff635dbc996d1ec25f95cf8181.gif)
-## Adding and Item
-!["Overview"]
-(https://i.gyazo.com/92ddaa7f85ab9bd7067de0e0c8386fac.gif)
+
+## Adding an Item
+!["Add Item"](https://i.gyazo.com/92ddaa7f85ab9bd7067de0e0c8386fac.gif)
 
 
 ## Dependencies
