@@ -15,7 +15,7 @@ export default class ModalExample extends Component {
         actionSource: [],
     }
     this.greenPoints = () => this.props.fetchActions.filter(action => !action.redFlag).length;
-    this.redPoints = () => this.props.fetchActions.filter(action => action.redFlag).length;
+    this.redPoints = () => this.props.fetchActions.filter(action => action.redFlag).length - 1;
   
   }
 
