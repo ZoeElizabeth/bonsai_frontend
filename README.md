@@ -8,13 +8,16 @@ Each healthy action inputed is a point towards the growth of your tree.
 Data maps, achievments, badges, and user authentication are still in development. 
 
 ## WireFrame
-!["Wireframe"]
-(https://github.com/ZoeElizabeth/bonsai_frontend/blob/master/wireframe/WireFrame.png?raw=true)
+!["Wireframe"](https://github.com/ZoeElizabeth/bonsai_frontend/blob/master/wireframe/WireFrame.png?raw=true)
+
 ## Logging In
 !["Logging In"](https://i.gyazo.com/d97edc7dec543781c33aaacf8de21693.gif)
+
+
 ## List Overview
-!["Overview"]
-(https://i.gyazo.com/d20016ff635dbc996d1ec25f95cf8181.gif)
+!["Overview"](https://i.gyazo.com/d20016ff635dbc996d1ec25f95cf8181.gif)
+
+
 
 ## Adding an Item
 !["Add Item"](https://i.gyazo.com/92ddaa7f85ab9bd7067de0e0c8386fac.gif)
