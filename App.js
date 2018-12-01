@@ -21,7 +21,7 @@ export default class App extends React.Component {
 
   fetchActions = () => {
   
-    return fetch('http://192.168.88.103:8080/user/1/actions')
+    return fetch('http://localhost:8080/user/1/actions')
     .then((response) => response.json())
     .then((responseJson) => {
       this.setState({

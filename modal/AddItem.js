@@ -61,7 +61,7 @@ export default class AddItem extends Component {
     const color_category = this.state.color_category;
 
 
-    return fetch('http://192.168.88.103:8080/dayli_list/1/actions', {
+    return fetch('http://localhost:8080/dayli_list/1/actions', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
